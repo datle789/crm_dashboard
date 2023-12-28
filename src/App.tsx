@@ -5,11 +5,13 @@ import Home from './Pages/homePage/Home';
 import About from './Pages/About'
 import Detail from './Pages/detailPage/Detail';
 import CreateResponse from './Pages/createResponse/Create';
+import { RedirectToLogin } from './Pages/RedirectToLogin';
 import { Login } from './Pages';
 
 function App() {
   return (
     <Routes>
+      <Route index element={<RedirectToLogin />} />
       <Route path='/login' element={<Login />} />
       <Route path='/home' element={<Home />} />
       <Route path='/about' element={<About />} />
