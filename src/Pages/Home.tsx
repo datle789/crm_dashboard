@@ -8,9 +8,9 @@ type Props = {
 const Home = (props: Props) => {
     return (
         <Layout>
-            <div>Home Page</div>
+            <div className="p-[200px]">Home Page</div>
         </Layout>
     )
 }
 
-export default Home 
+export default Home
