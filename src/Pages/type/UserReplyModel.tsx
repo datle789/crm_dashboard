@@ -4,4 +4,6 @@ export interface UserReply {
     customerName: string;
     phoneNumber: number;
     description: string;
+    createdDate: string;
+    isSolved: boolean;
 }
