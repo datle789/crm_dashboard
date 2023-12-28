@@ -1,15 +1,17 @@
-import React, { useState, ChangeEvent } from 'react'
+import React, { useState, ChangeEvent, useEffect } from 'react'
 import LoginImg from '../img/Login.jpg'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import Cookies from 'js-cookie'
+import { setDataInSessionStorage } from './type/SetCurrentToSession'
 
 const Login = () => {
 
   const navigate = useNavigate()
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+
 
   const ACCESS_TOKEN_KEY = 'access_token'
   const setAccessToken = (token: string) => {
@@ -21,9 +23,11 @@ const Login = () => {
     try {
       const response = await axios.post('http://103.161.181.124:5000/api/auth/login', { username, password })
       if (response.status === 200) {
-        const accessToken = response.data.body.tokens.access.token
+        const accessToken = await response.data.body.tokens.access.token
         setAccessToken(accessToken)
-        navigate('/home')
+        setDataInSessionStorage(response.data.body.user._id)
+        console.log(response)
+        // navigate('/home')
       }
     } catch (error: any) {
       Swal.fire('Oops!', error.response.data.message, 'warning')
