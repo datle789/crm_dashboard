@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import Logo from "../img/rangdong.png"
+import Logo from "../../img/rangdong.png"
 
 
 type Props = {
