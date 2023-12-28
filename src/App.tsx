@@ -1,14 +1,20 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './Layout'
-import { Login, About, Home } from './Pages'
+import Home from './Pages/homePage/Home';
+import About from './Pages/About'
+import Detail from './Pages/detailPage/Detail';
+import CreateResponse from './Pages/createResponse/Create';
+import { Login } from './Pages';
 
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Login />} />
+      <Route path='/login' element={<Login />} />
       <Route path='/home' element={<Home />} />
       <Route path='/about' element={<About />} />
+      <Route path='/crm-user/:id' element={<Detail />} />
+      <Route path='/create' element={<CreateResponse />} />
     </Routes>
   );
 }
