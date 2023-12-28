@@ -5,10 +5,12 @@ import Home from './Pages/homePage/Home';
 import About from './Pages/About'
 import Detail from './Pages/detailPage/Detail';
 import CreateResponse from './Pages/createResponse/Create';
+import { Login } from './Pages';
 
 function App() {
   return (
     <Routes>
+      <Route path='/login' element={<Login />} />
       <Route path='/home' element={<Home />} />
       <Route path='/about' element={<About />} />
       <Route path='/crm-user/:id' element={<Detail />} />
