@@ -1,5 +1,5 @@
 import Layout from "../../Layout"
-import '../style/home.css'
+import '../../style/home.css'
 import Table from './Table'
 import NavSide from "./NavSide"
 import { useEffect, useState } from "react"

@@ -6,12 +6,15 @@ import Swal from 'sweetalert2'
 
 const CreateResponse = () => {
     const navigate = useNavigate()
+    const storedUserData = sessionStorage.getItem('Data')
+
     const [formData, setFormData] = useState({
-        uuid: '6471830d01df9e8330f78817',
+        uuid: storedUserData,
         customerName: '',
         phoneNumber: '',
         description: ''
     });
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
