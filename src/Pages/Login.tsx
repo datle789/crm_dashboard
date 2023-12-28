@@ -26,12 +26,10 @@ const Login = () => {
         const accessToken = await response.data.body.tokens.access.token
         setAccessToken(accessToken)
         setDataInSessionStorage(response.data.body.user._id)
-        console.log(response)
-        // navigate('/home')
+        navigate('/home')
       }
     } catch (error: any) {
       Swal.fire('Oops!', error.response.data.message, 'warning')
-      console.log(error)
     }
   }
 
