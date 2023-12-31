@@ -49,7 +49,6 @@ const ModalPopUp = ({ uuid }: Props) => {
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
-                contentLabel="Example Modal"
             >
 
                 <div className="p-5">

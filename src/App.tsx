@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './Layout'
 import Home from './Pages/homePage/Home';
 import About from './Pages/About'
-import CreateResponse from './Pages/createResponse/Create';
 import { RedirectToLogin } from './Pages/RedirectToLogin';
 import { Login } from './Pages';
 
@@ -14,7 +13,6 @@ function App() {
       <Route path='/login' element={<Login />} />
       <Route path='/home' element={<Home />} />
       <Route path='/about' element={<About />} />
-      <Route path='/create' element={<CreateResponse />} />
     </Routes>
   );
 }

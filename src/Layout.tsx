@@ -8,13 +8,12 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+
     return (
         <main>
             <Header />
             <div className="flex">
-                <div className="basis-[14%] min-h-screen fix border">
-                    <NavSide />
-                </div>
+                <NavSide />
                 <div className="basis-[86%] flex-auto">{children}</div>
             </div>
             <Footer />

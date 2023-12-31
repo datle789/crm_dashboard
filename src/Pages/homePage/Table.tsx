@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { UserReply } from "../type/UserReplyModel"
 import ModalPopUp from "../detailPage/ModalPopUp";
 import DeleteResponse from "../deleteResponse/DeleteResponse";
+import CreateResponse from "../createResponse/Create";
 
 interface Props {
     users: UserReply[];
@@ -14,20 +15,18 @@ const Table = ({ users, setUsers }: Props) => {
     return (
         <>
             <div className="p-10">
-                <h1 className="text-2xl">Hi Admin</h1>
+                <h1 className="text-2xl">Xin chào Admin</h1>
 
-                <div className="my-10">
-                    <Link to={"/create"} className="bg-blue-500 text-white font-bold py-2 px-3 rounded">Create a new response</Link>
-                </div>
+                <CreateResponse />
 
                 <table className="table-auto mt-10 w-full ">
                     <thead>
                         <tr>
-                            <th>Customer Name</th>
-                            <th>Phone Number</th>
-                            <th>Description</th>
-                            <th>Date</th>
-                            <th>Action</th>
+                            <th>Tên khách hàng</th>
+                            <th>Số điện thoại</th>
+                            <th>Mô tả</th>
+                            <th>Ngày tạo</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>

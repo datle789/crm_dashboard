@@ -40,13 +40,12 @@ const DeleteResponse = ({ id }: Props) => {
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
-                contentLabel="Example Modal"
             >
 
                 <div className="p-5">
                     <h1 className="text-2xl text-center">Bạn có chắc chắn muốn xóa phản hồi này</h1>
 
-                    <div className="mt-10 flex justify-center space-x-[50px]">
+                    <div className="mt-10 flex justify-center space-x-4">
                         <div>
                             <button onClick={handleDeleteBook} className="bg-red-500 text-white font-bold py-2 px-3 rounded">
                                 Xóa
