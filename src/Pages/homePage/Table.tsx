@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { UserReply } from "../type/UserReplyModel"
+import ModalPopUp from "../detailPage/ModalPopUp";
+import DeleteResponse from "../deleteResponse/DeleteResponse";
 
 interface Props {
     users: UserReply[];
@@ -46,12 +48,11 @@ const Table = ({ users, setUsers }: Props) => {
                                     <td>{user.description}</td>
                                     <td>{user.createdDate}</td>
                                     <td className="space-x-4">
-                                        <button className="bg-blue-500 text-white font-bold py-2 px-3 rounded">
+                                        {/* <button className="bg-blue-500 text-white font-bold py-2 px-3 rounded">
                                             <Link to={`/crm-user/${user.uuid}`}>Detail</Link>
-                                        </button>
-                                        <button className="bg-red-500 text-white font-bold py-2 px-3 rounded">
-                                            <Link to={`/delete/${user.id}`}>Delete</Link>
-                                        </button>
+                                        </button> */}
+                                        <ModalPopUp uuid={user.uuid} />
+                                        <DeleteResponse id={user.id} />
                                     </td>
                                 </tr>
                         ))}

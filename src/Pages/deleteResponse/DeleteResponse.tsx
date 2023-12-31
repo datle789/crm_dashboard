@@ -1,38 +1,69 @@
 import { useNavigate, useParams } from "react-router";
 import Layout from "../../Layout"
 import axios from "axios";
+import { redirect } from 'react-router-dom'
+import Modal from 'react-modal'
+import { useState } from "react";
 
-const DeleteResponse = () => {
 
-    const { id } = useParams()
-    const navigate = useNavigate();
+interface Props {
+    id: number
+}
+
+const DeleteResponse = ({ id }: Props) => {
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
 
     const handleDeleteBook = async () => {
-        await axios.delete(`http://103.160.2.183:8082/crm/${id}`)
-            .then(response => {
-                navigate('/home');
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        const response = await axios.delete(`http://103.160.2.183:8082/crm/${id}`)
+        if (response.data) {
+            window.location.reload();
+        } else {
+            console.log('không thể xóa')
+        }
     }
 
-    return (
-        <Layout>
-            <div className="p-10">
-                <h1 className='text-3xl my-4'>Delete Response</h1>
-                <div className='flex flex-col items-center border-2 border-sky-400 rounded-xl w-[600px] p-8 mx-auto'>
-                    <h3 className='text-2xl'>Are You Sure You want to delete this response?</h3>
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
 
-                    <button
-                        className='p-4 bg-red-600 text-white m-8 w-full'
-                        onClick={handleDeleteBook}
-                    >
-                        Yes, Delete it
-                    </button>
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
+
+    return (
+        <>
+            <button onClick={openModal} className="bg-red-500 text-white font-bold py-2 px-3 rounded">
+                Xóa
+            </button>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Example Modal"
+            >
+
+                <div className="p-5">
+                    <h1 className="text-2xl text-center">Bạn có chắc chắn muốn xóa phản hồi này</h1>
+
+                    <div className="mt-10 flex justify-center space-x-[50px]">
+                        <div>
+                            <button onClick={handleDeleteBook} className="bg-red-500 text-white font-bold py-2 px-3 rounded">
+                                Xóa
+                            </button>
+                        </div>
+                        <div>
+                            <button onClick={closeModal} className="bg-blue-500 text-white font-bold py-2 px-3 rounded">
+                                Đóng
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </Layout>
+
+
+            </Modal >
+        </>
+
     )
 }
 
