@@ -1,4 +1,4 @@
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons"
+import { faChevronLeft, faChevronRight, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 
@@ -20,14 +20,18 @@ const NavSide = () => {
     return (
         <>
             {
-                isOpen ? <div className="basis-[14%] min-h-screen fix border">
-                    <div className="bg-gradient-to-b from-[#07bd89] to-[#006e8c] min-h-full">
-                        <div className="flex justify-end">
-                            <button onClick={handleClose} className=" fixed">
-                                <FontAwesomeIcon className="p-2" icon={faChevronLeft} size="lg" />
-                            </button>
+                isOpen ? <div className="basis-[14%] bg-gradient-to-b from-[#07bd89] to-[#006e8c]  min-h-screen fix border ">
+                    <div className="flex justify-end">
+                        <button onClick={handleClose} className="">
+                            <FontAwesomeIcon className="p-2" icon={faChevronLeft} size="lg" />
+                        </button>
+                    </div>
+                    <div className="flex min-h-full">
+                        <div className="w-[90%] text-center">
+                            <FontAwesomeIcon className="p-2 text-5xl" icon={faUser} size="lg" />
+                            <h1>name</h1>
                         </div>
-                        <div>Avatar</div>
+
                     </div>
                 </div > :
                     <div className="fixed">
