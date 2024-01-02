@@ -10,7 +10,7 @@ const NavSide = () => {
 
     const [isOpen, setIsOpen] = useState<boolean>(true)
 
-    let adminName: string = adminData.name
+    let adminName: string = adminData?.name
 
 
     const handleClose = () => {
