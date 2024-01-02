@@ -46,7 +46,7 @@ const ModalPopUp = ({ uuid }: Props) => {
     return (
         <>
             <button onClick={openModal} className="bg-blue-500 text-white font-bold py-2 px-3 rounded">Chi Tiết</button>
-            <Modal
+            <Modal ariaHideApp={false}
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
             >

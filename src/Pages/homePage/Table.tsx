@@ -3,6 +3,7 @@ import { UserReply } from "../type/UserReplyModel"
 import ModalPopUp from "../detailPage/ModalPopUp";
 import DeleteResponse from "../deleteResponse/DeleteResponse";
 import CreateResponse from "../createResponse/Create";
+import adminData from '../SessionInfo'
 
 interface Props {
     users: UserReply[];
@@ -15,7 +16,7 @@ const Table = ({ users, setUsers }: Props) => {
     return (
         <>
             <div className="p-10">
-                <h1 className="text-2xl">Xin chào Admin</h1>
+                <h1 className="text-2xl">Xin chào {adminData.name}</h1>
 
                 <CreateResponse />
 

@@ -1,6 +1,7 @@
 import { faChevronLeft, faChevronRight, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
+import adminData from "../SessionInfo"
 
 
 
@@ -8,6 +9,9 @@ import { useState } from "react"
 const NavSide = () => {
 
     const [isOpen, setIsOpen] = useState<boolean>(true)
+
+    let adminName: string = adminData.name
+
 
     const handleClose = () => {
         setIsOpen(false)
@@ -29,7 +33,7 @@ const NavSide = () => {
                     <div className="flex min-h-full">
                         <div className="w-[90%] text-center">
                             <FontAwesomeIcon className="p-2 text-5xl" icon={faUser} size="lg" />
-                            <h1>name</h1>
+                            <h1>{adminName}</h1>
                         </div>
 
                     </div>

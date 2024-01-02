@@ -4,10 +4,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import Modal from 'react-modal'
+import adminData from "../SessionInfo";
 
 const CreateResponse = () => {
     const navigate = useNavigate()
-    const storedUserData = sessionStorage.getItem('Data')
+    let adminId: number = adminData.id
+
+
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const [formData, setFormData] = useState({
@@ -58,7 +61,7 @@ const CreateResponse = () => {
         <>
             <div className="my-10">
                 <button onClick={openModal} className="bg-blue-500 text-white font-bold py-2 px-3 rounded">Tạo phản hồi</button>
-                <Modal
+                <Modal ariaHideApp={false}
                     isOpen={modalIsOpen}
                     onRequestClose={closeModal}
                 >
