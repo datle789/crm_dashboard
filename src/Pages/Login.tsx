@@ -25,7 +25,9 @@ const Login = () => {
       if (response.status === 200) {
         const accessToken = await response.data.body.tokens.access.token
         setAccessToken(accessToken)
-        setDataInSessionStorage(response.data.body.user._id)
+        const adminData = response.data.body.user
+        setDataInSessionStorage(JSON.stringify(adminData))
+        // console.log(response.data.body.user.name)
         navigate('/home')
       }
     } catch (error: any) {

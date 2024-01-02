@@ -7,9 +7,20 @@ import Swal from 'sweetalert2'
 const CreateResponse = () => {
     const navigate = useNavigate()
     const storedUserData = sessionStorage.getItem('Data')
+    let adminId: number = 0
+
+    if (storedUserData) {
+        try {
+            const adminData = JSON.parse(storedUserData);
+            adminId = adminData.id
+        } catch (error) {
+            console.error('Error accessing stored user data:', error);
+        }
+    }
+
 
     const [formData, setFormData] = useState({
-        uuid: storedUserData,
+        uuid: adminId,
         customerName: '',
         phoneNumber: '',
         description: ''
