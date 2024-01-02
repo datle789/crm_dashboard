@@ -8,7 +8,7 @@ import adminData from "../SessionInfo";
 
 const CreateResponse = () => {
     const navigate = useNavigate()
-    let adminId: number = adminData.id
+    let adminId: number = adminData?.id
 
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
