@@ -27,7 +27,6 @@ const Login = () => {
         setAccessToken(accessToken)
         const adminData = response.data.body.user
         setDataInSessionStorage(JSON.stringify(adminData))
-        // console.log(response.data.body.user.name)
         navigate('/home')
       }
     } catch (error: any) {
