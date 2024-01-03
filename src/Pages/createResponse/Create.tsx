@@ -36,15 +36,15 @@ const CreateResponse = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!formData.customerName) {
-            Swal.fire('error', 'customer name invalid', 'error')
+            Swal.fire('error', 'Tên người nhập không hợp lệ', 'error')
             return
         }
         if (!formData.phoneNumber) {
-            Swal.fire('error', 'phone number invalid', 'error')
+            Swal.fire('error', 'Số điện thoại không hợp lệ', 'error')
             return
         }
         if (!formData.description) {
-            Swal.fire('error', 'description invalid', 'error')
+            Swal.fire('error', 'Mô tả không hợp lệ', 'error')
             return
         }
 
@@ -66,12 +66,12 @@ const CreateResponse = () => {
                     onRequestClose={closeModal}
                 >
                     <div className="p-10">
-                        <h1 className="text-2xl text-center">Create Response</h1>
+                        <h1 className="text-2xl text-center">Tạo phản hồi</h1>
                         <div className="container mx-auto mt-8">
                             <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-md">
                                 <div className="mb-4">
                                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="customerName">
-                                        Customer Name
+                                        Tên người nhập
                                     </label>
                                     <input
                                         type="text"
@@ -84,7 +84,7 @@ const CreateResponse = () => {
                                 </div>
                                 <div className="mb-4">
                                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phoneNumber">
-                                        Phone number
+                                        Số điện thoại
                                     </label>
                                     <input
                                         type="tel"
@@ -97,7 +97,7 @@ const CreateResponse = () => {
                                 </div>
                                 <div className="mb-4">
                                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                                        description
+                                        Mô tả chi tiết
                                     </label>
                                     <input
                                         type="text"
@@ -113,7 +113,7 @@ const CreateResponse = () => {
                                         type="submit"
                                         className="bg-blue-500 text-white px-4 py-2 rounded-full focus:outline-none"
                                     >
-                                        Submit
+                                        Tạo phàn hồi
                                     </button>
                                 </div>
                             </form>
