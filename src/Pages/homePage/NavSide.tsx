@@ -10,7 +10,18 @@ const NavSide = () => {
 
     const [isOpen, setIsOpen] = useState<boolean>(true)
 
-    let adminName: string = adminData?.name
+    const storedUserData = sessionStorage.getItem('Data')
+    let adminData: any
+
+    if (storedUserData) {
+        try {
+            adminData = JSON.parse(storedUserData);
+        } catch (error) {
+            console.error('Error accessing stored user data:', error);
+        }
+    }
+
+    let adminName: string | undefined = adminData.name
 
 
     const handleClose = () => {

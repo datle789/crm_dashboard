@@ -13,10 +13,23 @@ interface Props {
 
 const Table = ({ users, setUsers }: Props) => {
 
+    const storedUserData = sessionStorage.getItem('Data')
+    let adminData: any
+
+    if (storedUserData) {
+        try {
+            adminData = JSON.parse(storedUserData);
+        } catch (error) {
+            console.error('Error accessing stored user data:', error);
+        }
+    }
+
+    const name: string | undefined = adminData.name
+
     return (
         <>
             <div className="p-10">
-                <h1 className="text-2xl">Xin chào {adminData?.name}</h1>
+                <h1 className="text-2xl">Xin chào {name}</h1>
 
                 <CreateResponse />
 
@@ -59,6 +72,7 @@ const Table = ({ users, setUsers }: Props) => {
                     </tbody>
                 </table>
             </div>
+
         </>
     )
 }
