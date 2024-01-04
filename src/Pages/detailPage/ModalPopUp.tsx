@@ -52,22 +52,22 @@ const ModalPopUp = ({ uuid }: Props) => {
                 onRequestClose={closeModal}
             >
 
-                <div className="p-5">
-                    <h1 className="text-2xl text-center">Danh sách phản hồi của {!responseLists ? <>loading...</> : customerName}</h1>
+                <div className="p-5 ">
+                    <h1 className="text-2xl text-center text-white">Danh sách phản hồi của {!responseLists ? <>loading...</> : customerName}</h1>
                     <table className="table-auto mt-10 w-full ">
                         <thead>
                             <tr>
-                                <th>Customer Name</th>
-                                <th>Phone Number</th>
-                                <th>Description</th>
+                                <th className='text-white'>Customer Name</th>
+                                <th className='text-white'>Phone Number</th>
+                                <th className='text-white'>Description</th>
                             </tr>
                         </thead>
                         <tbody>
                             {responseLists ? responseLists.map((responseList) => (
                                 <tr key={responseList.id}>
-                                    <td>{responseList.customerName}</td>
-                                    <td>{responseList.phoneNumber}</td>
-                                    <td>{responseList.description}</td>
+                                    <td className='text-white'>{responseList.customerName}</td>
+                                    <td className='text-white'>{responseList.phoneNumber}</td>
+                                    <td className='text-white'>{responseList.description}</td>
 
                                 </tr>
                             )) : []}

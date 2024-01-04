@@ -17,7 +17,7 @@ const CreateResponse = () => {
         uuid: adminId,
         customerName: '',
         phoneNumber: '',
-        description: ''
+        description: '',
     });
 
     const openModal = () => {
@@ -66,9 +66,9 @@ const CreateResponse = () => {
                     onRequestClose={closeModal}
                 >
                     <div className="p-10">
-                        <h1 className="text-2xl text-center">Tạo phản hồi</h1>
+                        <h1 className="text-2xl text-center text-gray-900 ">Tạo Phản Hồi</h1>
                         <div className="container mx-auto mt-8">
-                            <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-md">
+                            <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-xl rounded-sm">
                                 <div className="mb-4">
                                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="customerName">
                                         Tên người nhập
