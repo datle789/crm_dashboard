@@ -1,28 +1,17 @@
 import { faChevronLeft, faChevronRight, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
-import adminData from "../SessionInfo"
-
-
-
+import { useEffect, useState } from "react"
+import getAdminData from "../SessionInfo"
 
 const NavSide = () => {
 
     const [isOpen, setIsOpen] = useState<boolean>(true)
-
-    const storedUserData = sessionStorage.getItem('Data')
-    let adminData: any
-
-    if (storedUserData) {
-        try {
-            adminData = JSON.parse(storedUserData);
-        } catch (error) {
-            console.error('Error accessing stored user data:', error);
-        }
-    }
-
-    let adminName: string | undefined = adminData.name
-
+    const [adminName, setAdminName] = useState('')
+    useEffect(() => {
+        getAdminData().then((adminData) => {
+            setAdminName(adminData.name)
+        })
+    }, [])
 
     const handleClose = () => {
         setIsOpen(false)

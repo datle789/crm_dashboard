@@ -3,7 +3,9 @@ import { UserReply } from "../type/UserReplyModel"
 import ModalPopUp from "../detailPage/ModalPopUp";
 import DeleteResponse from "../deleteResponse/DeleteResponse";
 import CreateResponse from "../createResponse/Create";
-import adminData from '../SessionInfo'
+import get from '../SessionInfo'
+import getAdminData from '../SessionInfo'
+import { useEffect, useState } from "react";
 
 interface Props {
     users: UserReply[];
@@ -13,18 +15,12 @@ interface Props {
 
 const Table = ({ users, setUsers }: Props) => {
 
-    const storedUserData = sessionStorage.getItem('Data')
-    let adminData: any
-
-    if (storedUserData) {
-        try {
-            adminData = JSON.parse(storedUserData);
-        } catch (error) {
-            console.error('Error accessing stored user data:', error);
-        }
-    }
-
-    const name: string | undefined = adminData.name
+    const [name, setName] = useState('')
+    useEffect(() => {
+        getAdminData().then((adminData) => {
+            setName(adminData.name)
+        })
+    }, [])
 
     return (
         <>
