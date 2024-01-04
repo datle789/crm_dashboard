@@ -10,11 +10,15 @@ import getAdminData from "../SessionInfo";
 const CreateResponse = () => {
     const navigate = useNavigate()
     // let adminId: number = adminData
-
-    const [id, setId] = useState('')
+    const [formData, setFormData] = useState({
+        uuid: '',
+        customerName: '',
+        phoneNumber: '',
+        description: '',
+    });
     useEffect(() => {
         getAdminData().then((adminData) => {
-            setId(adminData.id)
+            setFormData({ ...formData, uuid: adminData.id })
         })
     }, [])
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -24,13 +28,7 @@ const CreateResponse = () => {
             setFile(e.target.files[0]);
         }
     };
-    const [formData, setFormData] = useState({
-        uuid: id,
-        customerName: '',
-        phoneNumber: '',
-        description: '',
-    });
-    console.log(id)
+
     const openModal = () => {
         setModalIsOpen(true);
     };
@@ -43,6 +41,11 @@ const CreateResponse = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+
+    // useEffect(() => {
+    //     console.log(formData)
+    // }, [formData])
+
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -59,6 +62,7 @@ const CreateResponse = () => {
             return
         }
         const response = await axios.post('http://103.160.2.183:8082/crm', formData)
+        console.log(formData)
         if (response.status === 200) {
             // navigate('/home')
             window.location.reload();
