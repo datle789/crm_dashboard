@@ -34,7 +34,6 @@ const ModalPopUp = ({ uuid }: Props) => {
 
     const closeModal = () => {
         setModalIsOpen(false);
-        setResponseLists([]);
     };
 
     const customerName = useMemo(() => {
@@ -42,6 +41,8 @@ const ModalPopUp = ({ uuid }: Props) => {
             return responseLists[0]['customerName']
         }
     }, [responseLists])
+
+    console.log(responseLists)
 
     return (
         <>
