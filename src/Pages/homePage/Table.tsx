@@ -36,34 +36,26 @@ const Table = ({ users, setUsers }: Props) => {
                             <th>Số điện thoại</th>
                             <th>Mô tả</th>
                             <th>Ngày tạo</th>
+                            <th>Hoàn Thành</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         {users.map((user) => (
-                            user.isSolved ?
-                                <tr className="bg-green-400" key={user.id}>
-                                    <td>{user.customerName}</td>
-                                    <td>{user.phoneNumber}</td>
-                                    <td>{user.description}</td>
-                                    <td>{user.createdDate}</td>
-                                    <td>
-                                        <Link to={`/crm-user/${user.uuid}`} className="bg-blue-500 text-white font-bold py-2 px-3 rounded">Detail</Link>
-                                    </td>
-                                </tr> :
-                                <tr key={user.id}>
-                                    <td>{user.customerName}</td>
-                                    <td>{user.phoneNumber}</td>
-                                    <td>{user.description}</td>
-                                    <td>{user.createdDate}</td>
-                                    <td className="space-x-4">
-                                        {/* <button className="bg-blue-500 text-white font-bold py-2 px-3 rounded">
+                            <tr key={user.id}>
+                                <td>{user.customerName}</td>
+                                <td>{user.phoneNumber}</td>
+                                <td>{user.description}</td>
+                                <td>{user.createdDate}</td>
+                                <td>{user.isSolved ? 'Đã giải quyết' : 'Chưa giải quyết'}</td>
+                                <td className="space-x-4">
+                                    {/* <button className="bg-blue-500 text-white font-bold py-2 px-3 rounded">
                                             <Link to={`/crm-user/${user.uuid}`}>Detail</Link>
                                         </button> */}
-                                        <ModalPopUp uuid={user.uuid} />
-                                        <DeleteResponse id={user.id} />
-                                    </td>
-                                </tr>
+                                    <ModalPopUp uuid={user.uuid} />
+                                    <DeleteResponse id={user.id} />
+                                </td>
+                            </tr>
                         ))}
                     </tbody>
                 </table>

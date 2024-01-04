@@ -57,9 +57,11 @@ const ModalPopUp = ({ uuid }: Props) => {
                     <table className="table-auto mt-10 w-full ">
                         <thead>
                             <tr>
-                                <th className='text-white'>Customer Name</th>
-                                <th className='text-white'>Phone Number</th>
-                                <th className='text-white'>Description</th>
+                                <th className='text-white'>Tên khách hàng</th>
+                                <th className='text-white'>Số điện thoại</th>
+                                <th className='text-white'>Mô tả</th>
+                                <th className='text-white'>Ngày</th>
+                                <th className='text-white'>Hoàn thành</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,7 +70,10 @@ const ModalPopUp = ({ uuid }: Props) => {
                                     <td className='text-white'>{responseList.customerName}</td>
                                     <td className='text-white'>{responseList.phoneNumber}</td>
                                     <td className='text-white'>{responseList.description}</td>
-
+                                    <td className='text-white'>{responseList.createdDate}</td>
+                                    <td className='text-white'>
+                                        {responseList.isSolved ? 'Đã giải quyết' : 'Chưa giải quyết'}
+                                    </td>
                                 </tr>
                             )) : []}
                         </tbody>
