@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.ReactModal__Content {
+  background-image: linear-gradient(89.92deg, #07bd89 2.93%, #006e8c 89.38%) !important;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  ;
+}
