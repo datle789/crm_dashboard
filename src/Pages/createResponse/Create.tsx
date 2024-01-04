@@ -1,16 +1,22 @@
 import { useState } from "react";
 import Layout from "../../Layout"
 import axios from "axios";
+import { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import Modal from 'react-modal'
-import adminData from "../SessionInfo";
+import getAdminData from "../SessionInfo";
 
 const CreateResponse = () => {
     const navigate = useNavigate()
     // let adminId: number = adminData
 
-
+    const [id, setId] = useState('')
+    useEffect(() => {
+        getAdminData().then((adminData) => {
+            setId(adminData.id)
+        })
+    }, [])
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [file, setFile] = useState<File | null>(null);
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,12 +25,12 @@ const CreateResponse = () => {
         }
     };
     const [formData, setFormData] = useState({
-        // uuid: adminId,
+        uuid: id,
         customerName: '',
         phoneNumber: '',
         description: '',
     });
-
+    console.log(id)
     const openModal = () => {
         setModalIsOpen(true);
     };
@@ -51,10 +57,6 @@ const CreateResponse = () => {
         if (!formData.description) {
             Swal.fire('error', 'Mô tả không hợp lệ', 'error')
             return
-        }
-        if (!file) {
-            Swal.fire('error', 'Vui lòng chọn file', 'error')
-            return;
         }
         const response = await axios.post('http://103.160.2.183:8082/crm', formData)
         if (response.status === 200) {
