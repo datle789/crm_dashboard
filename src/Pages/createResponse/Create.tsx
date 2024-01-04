@@ -8,13 +8,18 @@ import adminData from "../SessionInfo";
 
 const CreateResponse = () => {
     const navigate = useNavigate()
-    let adminId: number = adminData?.id
+    // let adminId: number = adminData
 
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
-
+    const [file, setFile] = useState<File | null>(null);
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setFile(e.target.files[0]);
+        }
+    };
     const [formData, setFormData] = useState({
-        uuid: adminId,
+        // uuid: adminId,
         customerName: '',
         phoneNumber: '',
         description: '',
@@ -47,7 +52,10 @@ const CreateResponse = () => {
             Swal.fire('error', 'Mô tả không hợp lệ', 'error')
             return
         }
-
+        if (!file) {
+            Swal.fire('error', 'Vui lòng chọn file', 'error')
+            return;
+        }
         const response = await axios.post('http://103.160.2.183:8082/crm', formData)
         if (response.status === 200) {
             // navigate('/home')
@@ -105,6 +113,18 @@ const CreateResponse = () => {
                                         name="description"
                                         value={formData.description}
                                         onChange={handleChange}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+                                        Chọn File
+                                    </label>
+                                    <input
+                                        type="file"
+                                        id="file"
+                                        name="file"
+                                        onChange={handleFileChange}
                                         className="w-full px-3 py-2 border border-gray-300 rounded"
                                     />
                                 </div>
