@@ -43,7 +43,7 @@ const DeleteResponse = ({ id }: Props) => {
             >
 
                 <div className="p-5 flex flex-col items-center justify-center h-[500px]">
-                    <h1 className="text-2xl text-center">Bạn có chắc chắn muốn xóa phản hồi này</h1>
+                    <h1 className="text-2xl text-center text-white">Bạn có chắc chắn muốn xóa phản hồi này</h1>
 
                     <div className="mt-10 flex justify-center space-x-4">
                         <div>
