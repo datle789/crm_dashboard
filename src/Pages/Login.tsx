@@ -35,7 +35,7 @@ const Login = () => {
   }
 
   return (
-    <div className='p-[38px] bg-gradient-to-r from-[#07bd89] to-[#006e8c]'>
+    <div className='p-[38px] w-full bg-gradient-to-r from-[#07bd89] to-[#006e8c]'>
       <div className='relative h-[700px] w-[500px] m-auto shadow-2xl'>
         <div className='w-full'>
           <img src={LoginImg} alt="LoginImg" className='relative w-full h-[250px] bg-cover' />

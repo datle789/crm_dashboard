@@ -25,7 +25,7 @@ const ModalPopUp = ({ uuid }: Props) => {
         } catch (error) {
             console.log('không call được api')
         }
-    }, [responseLists])
+    }, [])
 
 
     const openModal = () => {
