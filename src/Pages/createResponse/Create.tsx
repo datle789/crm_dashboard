@@ -13,8 +13,8 @@ const CreateResponse = () => {
     // let adminId: number = adminData
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [urlImage, seturlImage] = useState('')
-    const SplitUrl = urlImage?.split('. ')
-    const urlCrmFile = 'http://103.160.2.183:8082/crm/files/' + SplitUrl[1]
+    // const SplitUrl = urlImage?.split('. ')
+    // const urlCrmFile = 'http://103.160.2.183:8082/crm/files/' + SplitUrl[1]
     const [formData, setFormData] = useState({
         uuid: '',
         customerName: '',
@@ -22,15 +22,15 @@ const CreateResponse = () => {
         description: '',
         crmFile: ''
     });
-    // let getImage: any = null
     useEffect(() => {
         getAdminData().then((adminData) => {
-            // if (SplitUrl[1]) {
-            //     getImage = urlCrmFile
-            // }
-            setFormData({ ...formData, uuid: adminData.id, crmFile: urlCrmFile })
+            if (urlImage) {
+                const SplitUrl = urlImage?.split('. ')
+                const urlCrmFile = 'http://103.160.2.183:8082/crm/files/' + SplitUrl[1]
+                setFormData({ ...formData, uuid: adminData.id, crmFile: urlCrmFile })
+            }
         })
-    }, [])
+    }, [urlImage, formData])
     const openModal = () => {
         setModalIsOpen(true);
     };
@@ -69,6 +69,7 @@ const CreateResponse = () => {
         if (response.status === 200) {
             // navigate('/home')
             window.location.reload();
+            console.log(formData)
         } else {
             Swal.fire('error', response.data.message, 'error')
         }

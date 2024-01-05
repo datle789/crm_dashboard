@@ -14,24 +14,26 @@ const UploadImages = ({ handleUpload }: Props) => {
       setSelectedFile(event.target.files[0]);
     }
   };
-  const handleUploadImage = async (event: ChangeEvent<HTMLInputElement>) => {
-    console.log('test')
+  const handleUploadImage = async () => {
+    // console.log('test')
 
-    // if (selectedFile) {
-    //   const formData = new FormData();
-    //   formData.append('file', selectedFile);
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
 
-    //   try {
-    //     const response = await axios.post('http://103.160.2.183:8082/crm/upload', formData);
-    //     if (response.status === 200) {
-    //       const urlImage = response.data.message;
-    //       handleUpload(urlImage)
-    //     }
-    //   } catch (error) {
-    //     console.error('Error uploading image:', error);
-    //   }
-    // }
+      try {
+        const response = await axios.post('http://103.160.2.183:8082/crm/upload', formData);
+        if (response.status === 200) {
+          const urlImage = response.data.message;
+          handleUpload(urlImage)
+        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
+    }
   };
+
+
 
   return (
     <div className='mb-4'>
@@ -39,7 +41,7 @@ const UploadImages = ({ handleUpload }: Props) => {
         Chọn File
       </label>
       <input id="file" type="file" onChange={handleFileChange} />
-      <button type='button' onClick={(event) => handleUploadImage}>Upload</button>
+      <button type='button' onClick={handleUploadImage}>Upload</button>
     </div>
   )
 }
