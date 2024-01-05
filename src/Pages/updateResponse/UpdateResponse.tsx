@@ -86,7 +86,7 @@ const UpdateResponse = ({ uuid, id }: Props) => {
         console.log(formData)
         if (response.status === 200) {
             // navigate('/home')
-            // window.location.reload();
+            window.location.reload();
         } else {
             Swal.fire('error', response.data.message, 'error')
         }
