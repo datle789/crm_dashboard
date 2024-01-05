@@ -15,22 +15,31 @@ const ModalPopUp = ({ uuid }: Props) => {
     const [responseLists, setResponseLists] = useState<UserReply[]>([])
 
 
-    useEffect(() => {
-        if (uuid) {
-            try {
-                const fetchData = async () => {
-                    const response = await axios.get(`http://103.160.2.183:8082/crm-user/${uuid}`)
-                    setResponseLists(response.data)
-                }
-                fetchData()
-            } catch (error) {
-                console.log('không call được api')
-            }
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (uuid) {
+    //         try {
+    //             const fetchData = async () => {
+    //                 const response = await axios.get(`http://103.160.2.183:8082/crm-user/${uuid}`)
+    //                 setResponseLists(response.data)
+    //             }
+    //             fetchData()
+    //         } catch (error) {
+    //             console.log('không call được api')
+    //         }
+    //     }
+    // }, [])
 
 
     const openModal = () => {
+        try {
+            const fetchData = async () => {
+                const response = await axios.get(`http://103.160.2.183:8082/crm-user/${uuid}`)
+                setResponseLists(response.data)
+            }
+            fetchData()
+        } catch (error) {
+            console.log('không call được api')
+        }
         setModalIsOpen(true);
     };
 
