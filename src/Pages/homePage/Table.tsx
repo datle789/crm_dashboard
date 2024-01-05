@@ -6,6 +6,8 @@ import CreateResponse from "../createResponse/Create";
 import get from '../SessionInfo'
 import getAdminData from '../SessionInfo'
 import { useEffect, useState } from "react";
+import UpdateResponse from "../updateResponse/UpdateResponse";
+import axios from "axios";
 
 interface Props {
     users: UserReply[];
@@ -21,6 +23,7 @@ const Table = ({ users, setUsers }: Props) => {
             setName(adminData.name)
         })
     }, [])
+
 
     return (
         <>
@@ -49,16 +52,16 @@ const Table = ({ users, setUsers }: Props) => {
                                 <td>{user.createdDate}</td>
                                 <td>{user.isSolved ? 'Đã giải quyết' : 'Chưa giải quyết'}</td>
                                 <td className="space-x-4">
-                                    {/* <button className="bg-blue-500 text-white font-bold py-2 px-3 rounded">
-                                            <Link to={`/crm-user/${user.uuid}`}>Detail</Link>
-                                        </button> */}
                                     <ModalPopUp uuid={user.uuid} />
                                     <DeleteResponse id={user.id} />
+                                    <UpdateResponse uuid={user.uuid} id={user.id} />
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+
+
             </div>
 
         </>
