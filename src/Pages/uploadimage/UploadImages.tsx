@@ -1,7 +1,8 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import axios from 'axios';
 import { MdUploadFile } from "react-icons/md";
 import Swal from 'sweetalert2'
+import { getBase64 } from '../../Util/ConverImageBase64'
 
 interface Props {
   handleUpload: (urlImage: string) => void;
@@ -12,6 +13,7 @@ interface Props {
 const UploadImages = ({ handleUpload, handleValueInput }: Props) => {
 
   const [selectedFile, setSelectedFile] = useState<File | null | string>(null);
+  const [priviewImage, setPriviewImage] = useState<string>('')
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const maxSizeInBytes = 1024 * 1024;
@@ -32,10 +34,39 @@ const UploadImages = ({ handleUpload, handleValueInput }: Props) => {
       }
       handleValueInput(selectedFile)
       setSelectedFile(selectedFile);
-      console.log(selectedFile);
-    }
 
+    }
   };
+
+  const toBase64 = async (file: File | string): Promise<string> => {
+    try {
+      // Kiểm tra nếu file là kiểu string (đã là base64), thì trả về luôn
+      if (typeof file === 'string') {
+        return file;
+      }
+      const base64String = await getBase64(file);
+      return base64String;
+    } catch (error) {
+      console.error('Error converting to base64:', error);
+      throw error;
+    }
+  };
+  useEffect(() => {
+    const loadImage = async () => {
+      if (selectedFile) {
+        try {
+          const base64String = await toBase64(selectedFile);
+          setPriviewImage(base64String);
+        } catch (error) {
+          console.error('Error loading base64 image:', error);
+        }
+      }
+    };
+
+    loadImage();
+  }, [selectedFile]);
+
+
   const handleUploadImage = async () => {
     if (!selectedFile) {
       Swal.fire('error', 'Vui lòng chọn một tệp tin trước khi gửi', 'error');
@@ -53,26 +84,11 @@ const UploadImages = ({ handleUpload, handleValueInput }: Props) => {
           handleUpload(urlImage)
           Swal.fire('success', 'Tải ảnh lên thành công !', 'success');
         }
-      } catch (error) {
-        console.error('Error uploading image:', error);
+      } catch (error: any) {
+        Swal.fire('error', error.response.data.message, 'error');
       }
     }
   };
-
-  // const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // const handleCancelImage = () => {
-
-  //   if (fileInputRef.current) {
-  //     fileInputRef.current.value = '';
-  //   }
-
-  //   setSelectedFile(null);
-
-  //   console.log(selectedFile)
-
-  // }
-
 
 
   return (
@@ -86,12 +102,10 @@ const UploadImages = ({ handleUpload, handleValueInput }: Props) => {
           <MdUploadFile size={25} />
           Tải ảnh lên
         </button>
-
-        {/* <button className='text-center w-[30%] gap-2 ml-5 flex items-center ' type='button' onClick={handleCancelImage}>
-          <MdUploadFile size={25} />
-          Xóa ảnh
-        </button> */}
       </div>
+      {priviewImage && <div className='my-4'>
+        <img src={priviewImage} alt="img" className='w-[100px] h-[120px] object-contain' />
+      </div>}
     </div>
   )
 }
