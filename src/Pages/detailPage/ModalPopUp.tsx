@@ -67,7 +67,7 @@ const ModalPopUp = ({ uuid }: Props) => {
                                     <td className='text-white'>{responseList.description}</td>
                                     <td className='text-white'>{responseList.createdDate}</td>
                                     <td className="w-[10%] h-[10%]">
-                                        {responseList.crmFile ? <img src={responseList.crmFile} alt="" /> : ''}
+                                        {responseList.crmFile ? <a href={responseList.crmFile}><img src={responseList.crmFile} alt="" /></a> : ''}
                                     </td>
                                     <td className='text-white'>
                                         {responseList.isSolved ? 'Đã giải quyết' : 'Chưa giải quyết'}
