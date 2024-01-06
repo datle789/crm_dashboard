@@ -15,21 +15,6 @@ const ModalPopUp = ({ uuid }: Props) => {
     const [responseLists, setResponseLists] = useState<UserReply[]>([])
 
 
-    // useEffect(() => {
-    //     if (uuid) {
-    //         try {
-    //             const fetchData = async () => {
-    //                 const response = await axios.get(`http://103.160.2.183:8082/crm-user/${uuid}`)
-    //                 setResponseLists(response.data)
-    //             }
-    //             fetchData()
-    //         } catch (error) {
-    //             console.log('không call được api')
-    //         }
-    //     }
-    // }, [])
-
-
     const openModal = () => {
         try {
             const fetchData = async () => {
@@ -55,7 +40,7 @@ const ModalPopUp = ({ uuid }: Props) => {
 
     return (
         <>
-            <button onClick={openModal} className="bg-blue-500 text-white font-bold py-2 px-3 rounded">Chi Tiết</button>
+            <button onClick={openModal} className="bg-blue-500 text-white font-bold py-1 px-2 rounded">Chi Tiết</button>
             <Modal ariaHideApp={false}
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
@@ -70,6 +55,7 @@ const ModalPopUp = ({ uuid }: Props) => {
                                 <th className='text-white'>Số điện thoại</th>
                                 <th className='text-white'>Mô tả</th>
                                 <th className='text-white'>Ngày</th>
+                                <th className='text-white'>Ảnh</th>
                                 <th className='text-white'>Hoàn thành</th>
                             </tr>
                         </thead>
@@ -80,6 +66,9 @@ const ModalPopUp = ({ uuid }: Props) => {
                                     <td className='text-white'>{responseList.phoneNumber}</td>
                                     <td className='text-white'>{responseList.description}</td>
                                     <td className='text-white'>{responseList.createdDate}</td>
+                                    <td className="w-[10%] h-[10%]">
+                                        <img src='https://cdnphoto.dantri.com.vn/YAfcu9nd4T5dX06hhpaf19_QvY8=/thumb_w/960/2021/05/15/co-gai-noi-nhu-con-vi-anh-can-cuoc-xinh-nhu-mong-nhan-sac-ngoai-doi-con-bat-ngo-hon-2-1621075314070.jpg' alt="User Avatar" />
+                                    </td>
                                     <td className='text-white'>
                                         {responseList.isSolved ? 'Đã giải quyết' : 'Chưa giải quyết'}
                                     </td>

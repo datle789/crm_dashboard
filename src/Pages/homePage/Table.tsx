@@ -39,6 +39,7 @@ const Table = ({ users, setUsers }: Props) => {
                             <th>Số điện thoại</th>
                             <th>Mô tả</th>
                             <th>Ngày tạo</th>
+                            <th>Ảnh</th>
                             <th>Hoàn Thành</th>
                             <th>Hành động</th>
                         </tr>
@@ -50,11 +51,16 @@ const Table = ({ users, setUsers }: Props) => {
                                 <td>{user.phoneNumber}</td>
                                 <td>{user.description}</td>
                                 <td>{user.createdDate}</td>
+                                <td className="w-[10%] h-[10%]">
+                                    <img src='https://cdnphoto.dantri.com.vn/YAfcu9nd4T5dX06hhpaf19_QvY8=/thumb_w/960/2021/05/15/co-gai-noi-nhu-con-vi-anh-can-cuoc-xinh-nhu-mong-nhan-sac-ngoai-doi-con-bat-ngo-hon-2-1621075314070.jpg' alt="User Avatar" />
+                                </td>
                                 <td>{user.isSolved ? 'Đã giải quyết' : 'Chưa giải quyết'}</td>
-                                <td className="space-x-4">
-                                    <ModalPopUp uuid={user.uuid} />
-                                    <DeleteResponse id={user.id} />
-                                    <UpdateResponse uuid={user.uuid} id={user.id} />
+                                <td>
+                                    <div className="flex h-auto space-x-4">
+                                        <ModalPopUp uuid={user.uuid} />
+                                        <DeleteResponse id={user.id} />
+                                        <UpdateResponse uuid={user.uuid} id={user.id} />
+                                    </div>
                                 </td>
                             </tr>
                         ))}

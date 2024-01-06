@@ -94,7 +94,7 @@ const UpdateResponse = ({ uuid, id }: Props) => {
     };
     return (
         <>
-            <button onClick={openModalUpdate} className="bg-blue-500 text-white font-bold py-2 px-3 rounded">Sửa</button>
+            <button onClick={openModalUpdate} className="bg-blue-500 text-white font-bold py-1 px-2 rounded">Sửa</button>
             <Modal ariaHideApp={false}
                 isOpen={modalUpdateIsOpen}
                 onRequestClose={closeModalUpdate}
