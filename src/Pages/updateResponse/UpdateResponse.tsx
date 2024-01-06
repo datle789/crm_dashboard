@@ -155,18 +155,6 @@ const UpdateResponse = ({ uuid, id }: Props) => {
                                     className="w-full px-3 py-2 border border-gray-300 rounded"
                                 />
                             </div>
-                            {/* <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                                    Chọn File
-                                </label>
-                                <input
-                                    type="file"
-                                    id="file"
-                                    name="file"
-                                    onChange={handleFileChange}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded"
-                                />
-                            </div> */}
                             <UpdateImage getImage={formData.crmFile} handleUpload={handleUrlImage}
                                 handleValueInput={handleValueInput} />
 
@@ -188,7 +176,7 @@ const UpdateResponse = ({ uuid, id }: Props) => {
                                     type="submit"
                                     className="bg-blue-500 text-white px-4 py-2 rounded-full focus:outline-none"
                                 >
-                                    Sửa phàn hồi
+                                    Sửa phản hồi
                                 </button>
                             </div>
                         </form>
