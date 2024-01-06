@@ -1,7 +1,6 @@
 import Layout from "../../Layout"
 import '../../style/home.css'
 import Table from './Table'
-import NavSide from "./NavSide"
 import { useEffect, useState } from "react"
 import { UserReply } from "../type/UserReplyModel"
 import axios from "axios"
@@ -34,6 +33,7 @@ const Home = () => {
     return (
         <Layout>
             <Table users={users} setUsers={setUsers} />
+
         </Layout>
     )
 }
