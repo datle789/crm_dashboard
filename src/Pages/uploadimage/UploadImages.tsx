@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { MdUploadFile } from "react-icons/md";
 import Swal from 'sweetalert2'
@@ -11,7 +11,7 @@ interface Props {
 
 const UploadImages = ({ handleUpload, handleValueInput }: Props) => {
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null | string>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const maxSizeInBytes = 1024 * 1024;
@@ -32,7 +32,7 @@ const UploadImages = ({ handleUpload, handleValueInput }: Props) => {
       }
       handleValueInput(selectedFile)
       setSelectedFile(selectedFile);
-      console.log(selectedFile.size ? "co" : "ko")
+      console.log(selectedFile);
     }
 
   };
@@ -59,6 +59,20 @@ const UploadImages = ({ handleUpload, handleValueInput }: Props) => {
     }
   };
 
+  // const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // const handleCancelImage = () => {
+
+  //   if (fileInputRef.current) {
+  //     fileInputRef.current.value = '';
+  //   }
+
+  //   setSelectedFile(null);
+
+  //   console.log(selectedFile)
+
+  // }
+
 
 
   return (
@@ -72,6 +86,11 @@ const UploadImages = ({ handleUpload, handleValueInput }: Props) => {
           <MdUploadFile size={25} />
           Tải ảnh lên
         </button>
+
+        {/* <button className='text-center w-[30%] gap-2 ml-5 flex items-center ' type='button' onClick={handleCancelImage}>
+          <MdUploadFile size={25} />
+          Xóa ảnh
+        </button> */}
       </div>
     </div>
   )
