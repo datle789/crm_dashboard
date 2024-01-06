@@ -61,6 +61,7 @@ const DeleteResponse = ({ id }: Props) => {
 
             </Modal >
 
+
         </>
 
     )
