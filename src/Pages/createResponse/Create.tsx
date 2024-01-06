@@ -141,7 +141,7 @@ const CreateResponse = () => {
                                         type="submit"
                                         className="bg-blue-500 text-white px-4 py-2 rounded-full focus:outline-none"
                                     >
-                                        Tạo phàn hồi
+                                        Tạo phản hồi
                                     </button>
                                 </div>
                             </form>
