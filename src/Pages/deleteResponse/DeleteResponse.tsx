@@ -34,7 +34,7 @@ const DeleteResponse = ({ id }: Props) => {
 
     return (
         <>
-            <button onClick={openModal} className="bg-red-500 text-white font-bold py-2 px-3 rounded">
+            <button onClick={openModal} className="bg-red-500 text-white font-bold py-1 px-2 rounded">
                 Xóa
             </button>
             <Modal ariaHideApp={false}
