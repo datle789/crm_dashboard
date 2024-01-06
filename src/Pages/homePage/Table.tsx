@@ -6,6 +6,8 @@ import CreateResponse from "../createResponse/Create";
 import get from '../SessionInfo'
 import getAdminData from '../SessionInfo'
 import { useEffect, useState } from "react";
+import UpdateResponse from "../updateResponse/UpdateResponse";
+import axios from "axios";
 
 interface Props {
     users: UserReply[];
@@ -22,6 +24,7 @@ const Table = ({ users, setUsers }: Props) => {
         })
     }, [])
 
+
     return (
         <>
             <div className="p-10">
@@ -36,6 +39,7 @@ const Table = ({ users, setUsers }: Props) => {
                             <th>Số điện thoại</th>
                             <th>Mô tả</th>
                             <th>Ngày tạo</th>
+                            <th>Ảnh</th>
                             <th>Hoàn Thành</th>
                             <th>Hành động</th>
                         </tr>
@@ -47,18 +51,23 @@ const Table = ({ users, setUsers }: Props) => {
                                 <td>{user.phoneNumber}</td>
                                 <td>{user.description}</td>
                                 <td>{user.createdDate}</td>
+                                <td className="w-[10%] h-[10%]">
+                                    {user.crmFile ? <a href={user.crmFile}><img src={user.crmFile} alt="" /></a> : ''}
+                                </td>
                                 <td>{user.isSolved ? 'Đã giải quyết' : 'Chưa giải quyết'}</td>
-                                <td className="space-x-4">
-                                    {/* <button className="bg-blue-500 text-white font-bold py-2 px-3 rounded">
-                                            <Link to={`/crm-user/${user.uuid}`}>Detail</Link>
-                                        </button> */}
-                                    <ModalPopUp uuid={user.uuid} />
-                                    <DeleteResponse id={user.id} />
+                                <td>
+                                    <div className="flex h-auto space-x-4">
+                                        <ModalPopUp uuid={user.uuid} />
+                                        <DeleteResponse id={user.id} />
+                                        <UpdateResponse uuid={user.uuid} id={user.id} />
+                                    </div>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+
+
             </div>
 
         </>

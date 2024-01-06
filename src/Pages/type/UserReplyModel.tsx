@@ -6,4 +6,5 @@ export interface UserReply {
     description: string;
     createdDate: string;
     isSolved: boolean;
+    crmFile: string
 }
