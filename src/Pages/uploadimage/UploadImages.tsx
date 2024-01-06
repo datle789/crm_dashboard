@@ -1,23 +1,48 @@
 import React, { ChangeEvent, useState } from 'react';
 import axios from 'axios';
+import { MdUploadFile } from "react-icons/md";
+import Swal from 'sweetalert2'
+
 interface Props {
   handleUpload: (urlImage: string) => void;
+  handleValueInput: (urlImage: object) => void;
 }
 
 
-const UploadImages = ({ handleUpload }: Props) => {
+const UploadImages = ({ handleUpload, handleValueInput }: Props) => {
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const maxSizeInBytes = 1024 * 1024;
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
     if (event.target.files && event.target.files.length > 0) {
-      setSelectedFile(event.target.files[0]);
+      const selectedFile = event.target.files[0];
+      // Check if the file type is allowed
+      if (!allowedTypes.includes(selectedFile.type)) {
+        Swal.fire('error', 'Chỉ chấp nhận các loại file ảnh (JPEG, PNG, GIF)', 'error');
+        event.target.value = '';
+        return;
+      }
+      // Check if the file size is within the limit
+      if (selectedFile.size > maxSizeInBytes) {
+        Swal.fire('error', 'Kích thước tệp tin quá lớn. Hãy chọn một tệp tin nhỏ hơn', 'error');
+        event.target.value = '';
+        return;
+      }
+      handleValueInput(selectedFile)
+      setSelectedFile(selectedFile);
+      console.log(selectedFile.size ? "co" : "ko")
     }
+
   };
   const handleUploadImage = async () => {
-    // console.log('test')
-
+    if (!selectedFile) {
+      Swal.fire('error', 'Vui lòng chọn một tệp tin trước khi gửi', 'error');
+      return
+    }
     if (selectedFile) {
+
       const formData = new FormData();
       formData.append('file', selectedFile);
 
@@ -26,6 +51,7 @@ const UploadImages = ({ handleUpload }: Props) => {
         if (response.status === 200) {
           const urlImage = response.data.message;
           handleUpload(urlImage)
+          Swal.fire('success', 'Tải ảnh lên thành công !', 'success');
         }
       } catch (error) {
         console.error('Error uploading image:', error);
@@ -36,12 +62,17 @@ const UploadImages = ({ handleUpload }: Props) => {
 
 
   return (
-    <div className='mb-4'>
+    <div className='mb-6 '>
       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
         Chọn File
       </label>
-      <input id="file" type="file" onChange={handleFileChange} />
-      <button type='button' onClick={handleUploadImage}>Upload</button>
+      <div className='flex items-center justify-between w-full'>
+        <input id="file" type="file" onChange={handleFileChange} className='w-[70%]' />
+        <button className='text-center w-[30%] gap-2 ml-5 flex items-center ' type='button' onClick={handleUploadImage}>
+          <MdUploadFile size={25} />
+          Tải ảnh lên
+        </button>
+      </div>
     </div>
   )
 }
