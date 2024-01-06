@@ -14,8 +14,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const navigate = useNavigate()
     const [check, setCheck] = useState(false)
 
+
     useEffect(() => {
         const AccessToken = getAccessToken('access_token');
+
 
         if (!AccessToken) {
             navigate('/login')
