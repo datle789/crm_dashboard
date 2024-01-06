@@ -4,15 +4,18 @@ import axios from "axios";
 import { redirect } from 'react-router-dom'
 import Modal from 'react-modal'
 import { useState } from "react";
+import ModalLayOut from "../Modal";
 
 
 interface Props {
-    id: number
+    id: number,
+    modalDeleteIsOpen: boolean,
+    closeDeleteModal: () => void
 }
 
-const DeleteResponse = ({ id }: Props) => {
+const DeleteResponse = ({ id, modalDeleteIsOpen, closeDeleteModal }: Props) => {
 
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    // const [modalIsOpen, setModalIsOpen] = useState(false);
 
 
     const handleDeleteBook = async () => {
@@ -24,42 +27,24 @@ const DeleteResponse = ({ id }: Props) => {
         }
     }
 
-    const openModal = () => {
-        setModalIsOpen(true);
-    };
+    // const openModal = () => {
+    //     setModalIsOpen(true);
+    // };
 
-    const closeModal = () => {
-        setModalIsOpen(false);
-    };
+    // const closeModal = () => {
+    //     setModalIsOpen(false);
+    // };
 
     return (
         <>
-            <button onClick={openModal} className="bg-red-500 text-white font-bold py-1 px-2 rounded">
-                Xóa
-            </button>
-            <Modal ariaHideApp={false}
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-            >
-
-                <div className="p-5 flex flex-col items-center justify-center h-[500px]">
-                    <h1 className="text-2xl text-center text-white">Bạn có chắc chắn muốn xóa phản hồi này</h1>
-
-                    <div className="mt-10 flex justify-center space-x-4">
-                        <div>
-                            <button onClick={handleDeleteBook} className="bg-red-500 text-white font-bold py-2 px-3 rounded">
-                                Xóa
-                            </button>
-                        </div>
-                        <div>
-                            <button onClick={closeModal} className="bg-blue-500 text-white font-bold py-2 px-3 rounded">
-                                Đóng
-                            </button>
-                        </div>
-                    </div>
+            <ModalLayOut modalIsOpen={modalDeleteIsOpen} closeModal={closeDeleteModal}>
+                <h2>Bạn có chắc chắn muốn xóa không?</h2>
+                <div className="mt-[20px] flex items-center justify-center space-x-5">
+                    <button className="bg-blue-500 text-white font-bold py-2 px-3 rounded" onClick={closeDeleteModal}>Hủy</button>
+                    <button className="bg-red-500 text-white font-bold py-2 px-3 rounded" onClick={handleDeleteBook}>Xóa</button>
                 </div>
 
-            </Modal >
+            </ModalLayOut>
 
 
         </>

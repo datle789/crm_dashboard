@@ -9,6 +9,15 @@ import getAdminData from "../SessionInfo";
 import UpdateImage from "./UpdateImage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { UserReply } from "../type/UserReplyModel";
+import ModalLayOut from "../Modal";
+
+// interface Props {
+//     formDataUpdate: UserReply
+//     id: number
+//     modalUpdateIsOpen: boolean,
+//     closeModalUpdate: () => void,
+// }
 
 interface Props {
     uuid: number,
@@ -36,6 +45,7 @@ const UpdateResponse = ({ uuid, id }: Props) => {
         }
 
     }, [urlImage, formData])
+
 
 
     const [modalUpdateIsOpen, setModalUpdateIsOpen] = useState(false);
@@ -189,6 +199,7 @@ const UpdateResponse = ({ uuid, id }: Props) => {
                     </div>
                 </div>
             </Modal>
+
 
         </>
 
