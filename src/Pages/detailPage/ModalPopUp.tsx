@@ -3,6 +3,8 @@ import Modal from 'react-modal'
 import { useParams } from 'react-router-dom';
 import { UserReply } from '../type/UserReplyModel';
 import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 
 interface Props {
@@ -46,7 +48,10 @@ const ModalPopUp = ({ uuid }: Props) => {
                 onRequestClose={closeModal}
             >
 
-                <div className="p-5 ">
+                <div className="relative top-0">
+                    <div className="mt-2 absolute flex justify-end items-end w-full z-50">
+                        <FontAwesomeIcon onClick={closeModal} className="p-2 text-3xl text-white" icon={faXmark} size="lg" />
+                    </div>
                     <h1 className="text-2xl text-center text-white">Danh sách phản hồi của {!responseLists ? <>loading...</> : customerName}</h1>
                     <table className="table-auto mt-10 w-full ">
                         <thead>
@@ -76,11 +81,7 @@ const ModalPopUp = ({ uuid }: Props) => {
                             )) : []}
                         </tbody>
                     </table>
-                    <div className="mt-10 flex justify-end">
-                        <button onClick={closeModal} className="bg-blue-500 text-white font-bold py-2 px-3 rounded">
-                            Đóng
-                        </button>
-                    </div>
+
                 </div>
 
 

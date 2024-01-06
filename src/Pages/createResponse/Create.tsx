@@ -7,6 +7,8 @@ import Swal from 'sweetalert2'
 import Modal from 'react-modal'
 import getAdminData from "../SessionInfo";
 import UploadImages from '../uploadimage/UploadImages'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const CreateResponse = () => {
     const navigate = useNavigate()
@@ -91,8 +93,13 @@ const CreateResponse = () => {
                     isOpen={modalIsOpen}
                     onRequestClose={closeModal}
                 >
-                    <div className="p-10">
-                        <h1 className="text-2xl text-center text-gray-900 ">Tạo Phản Hồi</h1>
+
+
+                    <div className="relative top-0">
+                        <div className="mt-2 absolute flex justify-end items-end w-full z-50">
+                            <FontAwesomeIcon onClick={closeModal} className="p-2 text-3xl text-white" icon={faXmark} size="lg" />
+                        </div>
+                        <h1 className="text-2xl text-center text-white">Tạo Phản Hồi</h1>
                         <div className="container mx-auto mt-8">
                             <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-xl rounded-sm">
                                 <div className="mb-4">
@@ -147,12 +154,6 @@ const CreateResponse = () => {
                                     </button>
                                 </div>
                             </form>
-
-                            <div className="mt-10 flex justify-end mr-[32%]">
-                                <button onClick={closeModal} className="bg-blue-500 text-white font-bold py-2 px-3 rounded">
-                                    Đóng
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </Modal>
