@@ -59,8 +59,8 @@ const DeleteResponse = ({ id }: Props) => {
                     </div>
                 </div>
 
-
             </Modal >
+
         </>
 
     )
