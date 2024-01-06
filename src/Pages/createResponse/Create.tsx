@@ -12,23 +12,24 @@ const CreateResponse = () => {
     const navigate = useNavigate()
     // let adminId: number = adminData
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [urlImage, seturlImage] = useState('')
+    const [urlImage, seturlImage] = useState<string | null>('')
     const [formData, setFormData] = useState({
         uuid: '',
         customerName: '',
         phoneNumber: '',
         description: '',
-        crmFile: ''
+        crmFile: null
     });
     useEffect(() => {
         getAdminData().then((adminData) => {
+            setFormData({ ...formData, uuid: adminData.id })
             if (urlImage) {
                 const SplitUrl = urlImage?.split('. ')
-                const urlCrmFile = 'http://103.160.2.183:8082/crm/files/' + SplitUrl[1]
-                setFormData({ ...formData, uuid: adminData.id, crmFile: urlCrmFile })
+                const urlCrmFile: any = 'http://103.160.2.183:8082/crm/files/' + SplitUrl[1]
+                setFormData({ ...formData, crmFile: urlCrmFile })
             }
         })
-    }, [urlImage, formData])
+    }, [urlImage])
     const openModal = () => {
         setModalIsOpen(true);
     };
@@ -70,6 +71,7 @@ const CreateResponse = () => {
             Swal.fire('error', 'Vui lòng tải ảnh lên trước', 'error')
             return
         }
+        console.log(formData)
 
         const response = await axios.post('http://103.160.2.183:8082/crm', formData)
         if (response.status === 200) {
