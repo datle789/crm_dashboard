@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import Modal from 'react-modal'
 import getAdminData from "../SessionInfo";
+import UpdateImage from "./UpdateImage";
 
 interface Props {
     uuid: number,
@@ -13,6 +14,8 @@ interface Props {
 }
 
 const UpdateResponse = ({ uuid, id }: Props) => {
+
+    const [urlImage, seturlImage] = useState('')
     const [formData, setFormData] = useState({
         uuid: uuid,
         customerName: '',
@@ -23,9 +26,17 @@ const UpdateResponse = ({ uuid, id }: Props) => {
     });
 
 
+    useEffect(() => {
+        if (urlImage) {
+            const SplitUrl = urlImage?.split('. ')
+            const urlCrmFile = 'http://103.160.2.183:8082/crm/files/' + SplitUrl[1]
+            setFormData({ ...formData, crmFile: urlCrmFile })
+        }
+
+    }, [urlImage, formData])
+
 
     const [modalUpdateIsOpen, setModalUpdateIsOpen] = useState(false);
-
 
     const openModalUpdate = async () => {
         try {
@@ -48,16 +59,6 @@ const UpdateResponse = ({ uuid, id }: Props) => {
 
 
 
-
-    const [file, setFile] = useState<File | null>(null);
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
-            setFile(e.target.files[0]);
-        }
-    };
-
-
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -66,6 +67,14 @@ const UpdateResponse = ({ uuid, id }: Props) => {
         setFormData({ ...formData, [e.target.name]: e.target.checked });
     };
 
+
+    const handleUrlImage = (urlImage: string) => {
+        seturlImage(urlImage)
+    }
+    let valueInput: object
+    const handleValueInput = (value: object) => {
+        valueInput = value
+    }
 
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -80,6 +89,10 @@ const UpdateResponse = ({ uuid, id }: Props) => {
         }
         if (!formData.description) {
             Swal.fire('error', 'Mô tả không hợp lệ', 'error')
+            return
+        }
+        if (valueInput && !urlImage) {
+            Swal.fire('error', 'Vui lòng tải ảnh lên trước', 'error')
             return
         }
         const response = await axios.put(`http://103.160.2.183:8082/crm/${id}`, formData)
@@ -142,7 +155,7 @@ const UpdateResponse = ({ uuid, id }: Props) => {
                                     className="w-full px-3 py-2 border border-gray-300 rounded"
                                 />
                             </div>
-                            <div className="mb-4">
+                            {/* <div className="mb-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
                                     Chọn File
                                 </label>
@@ -153,7 +166,10 @@ const UpdateResponse = ({ uuid, id }: Props) => {
                                     onChange={handleFileChange}
                                     className="w-full px-3 py-2 border border-gray-300 rounded"
                                 />
-                            </div>
+                            </div> */}
+                            <UpdateImage getImage={formData.crmFile} handleUpload={handleUrlImage}
+                                handleValueInput={handleValueInput} />
+
                             <div className="mb-4 flex items-center space-x-5 my-8">
                                 <label className="block text-gray-700 text-sm font-bold" htmlFor="isSolved">
                                     Hoàn thành
