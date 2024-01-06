@@ -6,29 +6,29 @@ import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import Modal from 'react-modal'
 import getAdminData from "../SessionInfo";
+import UploadImages from '../uploadimage/UploadImages'
 
 const CreateResponse = () => {
     const navigate = useNavigate()
     // let adminId: number = adminData
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [urlImage, seturlImage] = useState('')
     const [formData, setFormData] = useState({
         uuid: '',
         customerName: '',
         phoneNumber: '',
         description: '',
+        crmFile: ''
     });
     useEffect(() => {
         getAdminData().then((adminData) => {
-            setFormData({ ...formData, uuid: adminData.id })
+            if (urlImage) {
+                const SplitUrl = urlImage?.split('. ')
+                const urlCrmFile = 'http://103.160.2.183:8082/crm/files/' + SplitUrl[1]
+                setFormData({ ...formData, uuid: adminData.id, crmFile: urlCrmFile })
+            }
         })
-    }, [])
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [file, setFile] = useState<File | null>(null);
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
-            setFile(e.target.files[0]);
-        }
-    };
-
+    }, [urlImage, formData])
     const openModal = () => {
         setModalIsOpen(true);
     };
@@ -45,8 +45,13 @@ const CreateResponse = () => {
     // useEffect(() => {
     //     console.log(formData)
     // }, [formData])
-
-
+    const handleUrlImage = (urlImage: string) => {
+        seturlImage(urlImage)
+    }
+    let valueInput: object
+    const handleValueInput = (value: object) => {
+        valueInput = value
+    }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!formData.customerName) {
@@ -61,11 +66,16 @@ const CreateResponse = () => {
             Swal.fire('error', 'Mô tả không hợp lệ', 'error')
             return
         }
+        if (valueInput && !urlImage) {
+            Swal.fire('error', 'Vui lòng tải ảnh lên trước', 'error')
+            return
+        }
+
         const response = await axios.post('http://103.160.2.183:8082/crm', formData)
-        console.log(formData)
         if (response.status === 200) {
             // navigate('/home')
             window.location.reload();
+            console.log(formData)
         } else {
             Swal.fire('error', response.data.message, 'error')
         }
@@ -122,18 +132,10 @@ const CreateResponse = () => {
                                         className="w-full px-3 py-2 border border-gray-300 rounded"
                                     />
                                 </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                                        Chọn File
-                                    </label>
-                                    <input
-                                        type="file"
-                                        id="file"
-                                        name="file"
-                                        onChange={handleFileChange}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded"
-                                    />
-                                </div>
+                                <UploadImages
+                                    handleUpload={handleUrlImage}
+                                    handleValueInput={handleValueInput}
+                                />
                                 <div className="text-center">
                                     <button
                                         type="submit"
