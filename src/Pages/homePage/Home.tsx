@@ -11,15 +11,6 @@ import { getAccessToken } from '../type/GetAccessToken';
 const Home = () => {
 
     const [users, setUsers] = useState<UserReply[]>([])
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        const AccessToken = getAccessToken('access_token');
-
-        if (!AccessToken) {
-            navigate('/login')
-        }
-    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
