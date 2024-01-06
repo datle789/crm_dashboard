@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import Logo from "../../img/rangdong.png"
+import Logout from '../../Pages/Logout'
 
 
 type Props = {
@@ -18,7 +19,7 @@ const Header = (props: Props) => {
                     </div>
                 </div>
                 <div className="space-x-4">
-                    <Link to="/Login" className="text-white hover:bg-slate-100 hover:text-black p-5 rounded-lg">Đăng xuất</Link>
+                    <Logout />
                 </div>
             </div>
         </nav>
