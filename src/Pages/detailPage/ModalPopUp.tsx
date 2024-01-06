@@ -67,7 +67,7 @@ const ModalPopUp = ({ uuid }: Props) => {
                                     <td className='text-white'>{responseList.description}</td>
                                     <td className='text-white'>{responseList.createdDate}</td>
                                     <td className="w-[10%] h-[10%]">
-                                        <img src='https://cdnphoto.dantri.com.vn/YAfcu9nd4T5dX06hhpaf19_QvY8=/thumb_w/960/2021/05/15/co-gai-noi-nhu-con-vi-anh-can-cuoc-xinh-nhu-mong-nhan-sac-ngoai-doi-con-bat-ngo-hon-2-1621075314070.jpg' alt="User Avatar" />
+                                        {responseList.crmFile ? <img src={responseList.crmFile} alt="" /> : ''}
                                     </td>
                                     <td className='text-white'>
                                         {responseList.isSolved ? 'Đã giải quyết' : 'Chưa giải quyết'}
