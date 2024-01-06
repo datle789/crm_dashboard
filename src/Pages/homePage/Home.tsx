@@ -5,11 +5,22 @@ import NavSide from "./NavSide"
 import { useEffect, useState } from "react"
 import { UserReply } from "../type/UserReplyModel"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
+import { getAccessToken } from '../type/GetAccessToken';
 
 
 const Home = () => {
 
     const [users, setUsers] = useState<UserReply[]>([])
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const AccessToken = getAccessToken('access_token');
+
+        if (!AccessToken) {
+            navigate('/login')
+        }
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,4 +38,4 @@ const Home = () => {
     )
 }
 
-export default Home 
+export default Home
