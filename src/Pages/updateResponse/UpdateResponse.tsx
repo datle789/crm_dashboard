@@ -20,15 +20,18 @@ import ModalLayOut from "../Modal";
 // }
 
 interface Props {
-    uuid: number,
+    formDataProp: any
     id: number,
+    modalUpdateIsOpen: boolean,
+    closeModalUpdate: () => void,
 }
 
-const UpdateResponse = ({ uuid, id }: Props) => {
+const UpdateResponse = ({ formDataProp, id, modalUpdateIsOpen, closeModalUpdate }: Props) => {
 
     const [urlImage, seturlImage] = useState('')
     const [formData, setFormData] = useState({
-        uuid: uuid,
+        id: id,
+        uuid: 0,
         customerName: '',
         phoneNumber: '',
         description: '',
@@ -36,54 +39,22 @@ const UpdateResponse = ({ uuid, id }: Props) => {
         crmFile: ''
     });
 
+    // nhận giá trị prop từ table
+    useEffect(() => {
+        setFormData(formDataProp)
+
+    }, [formDataProp])
+
 
     useEffect(() => {
         if (urlImage) {
             const SplitUrl = urlImage?.split('. ')
             const urlCrmFile = 'http://103.160.2.183:8082/crm/files/' + SplitUrl[1]
             setFormData({ ...formData, crmFile: urlCrmFile })
+
         }
 
-    }, [urlImage, formData])
-
-
-
-    const [modalUpdateIsOpen, setModalUpdateIsOpen] = useState(false);
-
-    // const openModalUpdate = async () => {
-    //     try {
-    //         const fetchData = async () => {
-    //             const response = await axios.get(` http://103.160.2.183:8082/crm/${id}`)
-    //             setFormData(response.data)
-    //         }
-    //         fetchData()
-    //     } catch (error) {
-    //         console.log('không call được api')
-    //     }
-
-    //     setModalUpdateIsOpen(true);
-    // };
-
-    useEffect(() => {
-        if (id && uuid) {
-            try {
-                const fetchData = async () => {
-                    const response = await axios.get(` http://103.160.2.183:8082/crm/${id}`)
-                    setFormData(response.data)
-                }
-                fetchData()
-            } catch (error) {
-                console.log('không call được api')
-            }
-
-            setModalUpdateIsOpen(true);
-        }
-    }, [])
-
-
-    const closeModalUpdate = () => {
-        setModalUpdateIsOpen(false);
-    };
+    }, [urlImage])
 
 
 
@@ -123,8 +94,9 @@ const UpdateResponse = ({ uuid, id }: Props) => {
             Swal.fire('error', 'Vui lòng tải ảnh lên trước', 'error')
             return
         }
-        const response = await axios.put(`http://103.160.2.183:8082/crm/${id}`, formData)
-        console.log(formData)
+
+
+        const response = await axios.put(`http://103.160.2.183:8082/crm/${formData.id}`, formData)
         if (response.status === 200) {
             // navigate('/home')
             window.location.reload();
@@ -135,7 +107,6 @@ const UpdateResponse = ({ uuid, id }: Props) => {
     };
     return (
         <>
-            {/* <button onClick={openModalUpdate} className="bg-blue-500 text-white font-bold py-1 px-2 rounded">Sửa</button> */}
             <Modal ariaHideApp={false}
                 isOpen={modalUpdateIsOpen}
                 onRequestClose={closeModalUpdate}

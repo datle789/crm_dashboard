@@ -25,6 +25,7 @@ const Table = ({ users, setUsers }: Props) => {
     }, [])
 
 
+    //modal create
     const [modalCreateIsOpen, setModalCreateIsOpen] = useState(false);
 
     const openCreateModal = () => {
@@ -36,7 +37,7 @@ const Table = ({ users, setUsers }: Props) => {
     };
 
 
-
+    //modal delete
     const [modalDeleteIsOpen, setModalDeleteIsOpen] = useState(false);
     const [iddelete, setiddelete] = useState<number>(0)
     const openDeleteModal = (id: number) => {
@@ -49,7 +50,7 @@ const Table = ({ users, setUsers }: Props) => {
     }
 
 
-
+    //modal update
     const [modalUpdateIsOpen, setModalUpdateIsOpen] = useState(false);
     const [idUpdate, setIdUpdate] = useState<number>(0)
     const [uuidUpdate, setUuidUpdate] = useState<number>(0)
@@ -63,28 +64,26 @@ const Table = ({ users, setUsers }: Props) => {
     });
 
 
-    const openModalUpdate = async (uuid: number, id: number) => {
+
+    const openModalUpdate = async (id: number) => {
 
         try {
             const fetchData = async () => {
                 const response = await axios.get(` http://103.160.2.183:8082/crm/${id}`)
                 setFormData(response.data)
-                console.log(formData)
             }
             fetchData()
         } catch (error) {
             console.log('không call được api')
         }
-        // setIdUpdate(id)
-        // setUuidUpdate(uuid)
+        setModalUpdateIsOpen(true);
 
     };
 
 
-    // console.log(idUpdate, "-", uuidUpdate)
-    // const closeModalUpdate = () => {
-    //     setModalUpdateIsOpen(false);
-    // };
+    const closeModalUpdate = () => {
+        setModalUpdateIsOpen(false);
+    };
 
 
 
@@ -117,7 +116,7 @@ const Table = ({ users, setUsers }: Props) => {
                                 <td>{user.description}</td>
                                 <td>{user.createdDate}</td>
                                 <td className="w-[10%] h-[10%]">
-                                    {user.crmFile ? <a href={user.crmFile}><img src={user.crmFile} alt="" /></a> : ''}
+                                    {user.crmFile ? <a href={user.crmFile}><img className="object-cover" src={user.crmFile} alt="" /></a> : ''}
                                 </td>
                                 <td>{user.isSolved ? 'Đã giải quyết' : 'Chưa giải quyết'}</td>
                                 <td>
@@ -128,7 +127,7 @@ const Table = ({ users, setUsers }: Props) => {
                                             Xóa
                                         </button>
                                         {/* <UpdateResponse uuid={user.uuid} id={user.id} /> */}
-                                        <button onClick={() => openModalUpdate(user.uuid, user.id)} className="bg-blue-500 text-white font-bold py-1 px-2 rounded">Sửa</button>
+                                        <button onClick={() => openModalUpdate(user.id)} className="bg-blue-500 text-white font-bold py-1 px-2 rounded">Sửa</button>
                                     </div>
                                 </td>
                             </tr>
@@ -136,7 +135,7 @@ const Table = ({ users, setUsers }: Props) => {
                     </tbody>
                 </table>
                 <DeleteResponse id={iddelete} modalDeleteIsOpen={modalDeleteIsOpen} closeDeleteModal={closeDeleteModal} />
-                <UpdateResponse id={idUpdate} uuid={uuidUpdate} />
+                <UpdateResponse formDataProp={formData} id={idUpdate} modalUpdateIsOpen={modalUpdateIsOpen} closeModalUpdate={closeModalUpdate} />
             </div>
 
         </>
