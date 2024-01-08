@@ -184,6 +184,7 @@ const UpdateResponse = ({ uuid, id }: Props) => {
                                         name="createdDate"
                                         value={formData.createdDate}
                                         onChange={handleChange}
+                                        className=" p-[7px] w-full text-gray-800 text-[18px] border outline-none rounded-md"
                                     />
                                 </div>
 
