@@ -115,7 +115,7 @@ const Table = ({ users, setUsers }: Props) => {
                                 <td>{user.phoneNumber}</td>
                                 <td>{user.description}</td>
                                 <td>{user.createdDate}</td>
-                                <td className="w-[10%] h-[10%]">
+                                <td className="w-[150px] h-[100px]">
                                     {user.crmFile ? <a href={user.crmFile}><img className="object-cover" src={user.crmFile} alt="" /></a> : ''}
                                 </td>
                                 <td>{user.isSolved ? 'Đã giải quyết' : 'Chưa giải quyết'}</td>
