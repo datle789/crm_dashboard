@@ -50,37 +50,38 @@ const Table = ({ users, setUsers }: Props) => {
 
 
 
-    // const [modalUpdateIsOpen, setModalUpdateIsOpen] = useState(false);
-    // const [idUpdate, setIdUpdate] = useState<number>(0)
-    // const [formData, setFormData] = useState({
-    //     uuid: 0,
-    //     id: 0,
-    //     customerName: '',
-    //     phoneNumber: 0,
-    //     description: '',
-    //     createdDate: '',
-    //     isSolved: false,
-    //     crmFile: ''
-    // });
+    const [modalUpdateIsOpen, setModalUpdateIsOpen] = useState(false);
+    const [idUpdate, setIdUpdate] = useState<number>(0)
+    const [uuidUpdate, setUuidUpdate] = useState<number>(0)
+    const [formData, setFormData] = useState({
+        uuid: 0,
+        customerName: '',
+        phoneNumber: '',
+        description: '',
+        isSolved: false,
+        crmFile: ''
+    });
 
 
-    // const openModalUpdate = async (uuid: number, id: number) => {
-    //     try {
-    //         const fetchData = async () => {
-    //             const response = await axios.get(` http://103.160.2.183:8082/crm/${id}`)
-    //             setFormData(response.data)
-    //             setIdUpdate(id)
-    //         }
-    //         fetchData()
-    //     } catch (error) {
-    //         console.log('không call được api')
-    //     }
+    const openModalUpdate = async (uuid: number, id: number) => {
 
-    //     setModalUpdateIsOpen(true);
-    // };
+        try {
+            const fetchData = async () => {
+                const response = await axios.get(` http://103.160.2.183:8082/crm/${id}`)
+                setFormData(response.data)
+                console.log(formData)
+            }
+            fetchData()
+        } catch (error) {
+            console.log('không call được api')
+        }
+        // setIdUpdate(id)
+        // setUuidUpdate(uuid)
+
+    };
 
 
-
+    // console.log(idUpdate, "-", uuidUpdate)
     // const closeModalUpdate = () => {
     //     setModalUpdateIsOpen(false);
     // };
@@ -126,8 +127,8 @@ const Table = ({ users, setUsers }: Props) => {
                                         <button onClick={() => openDeleteModal(user.id)} className="bg-red-500 text-white font-bold py-1 px-2 rounded">
                                             Xóa
                                         </button>
-                                        <UpdateResponse uuid={user.uuid} id={user.id} />
-                                        {/* <button onClick={() => openModalUpdate(user.uuid, user.id)} className="bg-blue-500 text-white font-bold py-1 px-2 rounded">Sửa</button> */}
+                                        {/* <UpdateResponse uuid={user.uuid} id={user.id} /> */}
+                                        <button onClick={() => openModalUpdate(user.uuid, user.id)} className="bg-blue-500 text-white font-bold py-1 px-2 rounded">Sửa</button>
                                     </div>
                                 </td>
                             </tr>
@@ -135,7 +136,7 @@ const Table = ({ users, setUsers }: Props) => {
                     </tbody>
                 </table>
                 <DeleteResponse id={iddelete} modalDeleteIsOpen={modalDeleteIsOpen} closeDeleteModal={closeDeleteModal} />
-                {/* <UpdateResponse formDataUpdate={formData} id={idUpdate} modalUpdateIsOpen={modalUpdateIsOpen} closeModalUpdate={closeModalUpdate} /> */}
+                <UpdateResponse id={idUpdate} uuid={uuidUpdate} />
             </div>
 
         </>

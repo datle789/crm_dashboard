@@ -50,19 +50,35 @@ const UpdateResponse = ({ uuid, id }: Props) => {
 
     const [modalUpdateIsOpen, setModalUpdateIsOpen] = useState(false);
 
-    const openModalUpdate = async () => {
-        try {
-            const fetchData = async () => {
-                const response = await axios.get(` http://103.160.2.183:8082/crm/${id}`)
-                setFormData(response.data)
-            }
-            fetchData()
-        } catch (error) {
-            console.log('không call được api')
-        }
+    // const openModalUpdate = async () => {
+    //     try {
+    //         const fetchData = async () => {
+    //             const response = await axios.get(` http://103.160.2.183:8082/crm/${id}`)
+    //             setFormData(response.data)
+    //         }
+    //         fetchData()
+    //     } catch (error) {
+    //         console.log('không call được api')
+    //     }
 
-        setModalUpdateIsOpen(true);
-    };
+    //     setModalUpdateIsOpen(true);
+    // };
+
+    useEffect(() => {
+        if (id && uuid) {
+            try {
+                const fetchData = async () => {
+                    const response = await axios.get(` http://103.160.2.183:8082/crm/${id}`)
+                    setFormData(response.data)
+                }
+                fetchData()
+            } catch (error) {
+                console.log('không call được api')
+            }
+
+            setModalUpdateIsOpen(true);
+        }
+    }, [])
 
 
     const closeModalUpdate = () => {
@@ -119,7 +135,7 @@ const UpdateResponse = ({ uuid, id }: Props) => {
     };
     return (
         <>
-            <button onClick={openModalUpdate} className="bg-blue-500 text-white font-bold py-1 px-2 rounded">Sửa</button>
+            {/* <button onClick={openModalUpdate} className="bg-blue-500 text-white font-bold py-1 px-2 rounded">Sửa</button> */}
             <Modal ariaHideApp={false}
                 isOpen={modalUpdateIsOpen}
                 onRequestClose={closeModalUpdate}
