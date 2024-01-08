@@ -93,12 +93,12 @@ const UploadImages = ({ handleUpload, handleValueInput }: Props) => {
 
   return (
     <div className='mb-6 '>
-      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+      <label className="block text-gray-100 text-sm font-bold mb-2" htmlFor="description">
         Chọn File
       </label>
       <div className='flex items-center justify-between w-full'>
-        <input id="file" type="file" onChange={handleFileChange} className='w-[70%]' />
-        <button className='text-center w-[30%] gap-2 ml-5 flex items-center ' type='button' onClick={handleUploadImage}>
+        <input id="file" type="file" onChange={handleFileChange} className='w-[70%] text-gray-100' />
+        <button className='text-center w-[30%] gap-2 ml-5 flex items-center text-gray-100 ' type='button' onClick={handleUploadImage}>
           <MdUploadFile size={25} />
           Tải ảnh lên
         </button>

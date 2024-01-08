@@ -5,6 +5,7 @@ import { UserReply } from '../type/UserReplyModel';
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import ImageModal from '../../components/priviewImage/ImageModal'
 
 
 interface Props {
@@ -15,7 +16,8 @@ const ModalPopUp = ({ uuid }: Props) => {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [responseLists, setResponseLists] = useState<UserReply[]>([])
-
+    const [isModalOpenImage, setIsModalOpenImage] = useState(false)
+    const [selectedImage, setSelectedImage] = useState('');
 
     const openModal = () => {
         try {
@@ -34,6 +36,16 @@ const ModalPopUp = ({ uuid }: Props) => {
         setModalIsOpen(false);
     };
 
+    const openModalImage = (imageSrc: string) => {
+        setSelectedImage(imageSrc)
+        setIsModalOpenImage(true)
+    }
+
+    const closeModalImage = () => {
+        setIsModalOpenImage(false)
+        setSelectedImage('')
+    }
+
     const customerName = useMemo(() => {
         if (responseLists?.length > 0) {
             return responseLists[0]['customerName']
@@ -46,6 +58,7 @@ const ModalPopUp = ({ uuid }: Props) => {
             <Modal ariaHideApp={false}
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
+                className='bg-gradient-to-r from-[#07bd89] to-[#006e8c] absolute inset-10 border overflow-auto rounded-md outline-none p-[30px]'
             >
 
                 <div className="relative top-0">
@@ -72,7 +85,9 @@ const ModalPopUp = ({ uuid }: Props) => {
                                     <td className='text-white'>{responseList.description}</td>
                                     <td className='text-white'>{responseList.createdDate}</td>
                                     <td className="w-[10%] h-[10%]">
-                                        {responseList.crmFile ? <a href={responseList.crmFile}><img src={responseList.crmFile} alt="" /></a> : ''}
+                                        {responseList.crmFile ?
+                                            <img src={responseList.crmFile} alt="" onClick={() => openModalImage(responseList.crmFile)} />
+                                            : ''}
                                     </td>
                                     <td className='text-white'>
                                         {responseList.isSolved ? 'Đã giải quyết' : 'Chưa giải quyết'}
@@ -81,12 +96,11 @@ const ModalPopUp = ({ uuid }: Props) => {
                             )) : []}
                         </tbody>
                     </table>
-
                 </div>
-
-
-
             </Modal>
+            {selectedImage && (
+                <ImageModal isOpen={isModalOpenImage} onClose={closeModalImage} imageSrc={selectedImage} />
+            )}
         </>
     )
 }
