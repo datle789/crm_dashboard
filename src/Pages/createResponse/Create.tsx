@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import ModalLayOut from "../Modal";
 
+import moment from 'moment';
+
 interface Props {
     modalCreateIsOpen: boolean;
     closeCreateModal: () => void
@@ -27,6 +29,8 @@ const CreateResponse = ({ modalCreateIsOpen, closeCreateModal }: Props) => {
         createdDate: '',
         crmFile: null
     });
+
+
     useEffect(() => {
         getAdminData().then((adminData) => {
             setFormData({ ...formData, uuid: adminData.id })

@@ -32,6 +32,7 @@ const UpdateResponse = ({ uuid, id }: Props) => {
         customerName: '',
         phoneNumber: '',
         description: '',
+        createdDate: ' ',
         isSolved: false,
         crmFile: ''
     });
@@ -116,6 +117,7 @@ const UpdateResponse = ({ uuid, id }: Props) => {
             Swal.fire('error', response.data.message, 'error')
         }
 
+
     };
     return (
         <>
@@ -173,6 +175,18 @@ const UpdateResponse = ({ uuid, id }: Props) => {
                                     onChange={handleChange}
                                     className="w-full px-3 py-2 border border-gray-300 rounded"
                                 />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-100 text-sm font-bold mb-2">Ngày gặp vấn đề: {formData.createdDate}</label>
+                                <div>
+                                    <input type="date"
+                                        id="createdDate"
+                                        name="createdDate"
+                                        value={formData.createdDate}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
                             </div>
                             <UpdateImage getImage={formData.crmFile} handleUpload={handleUrlImage}
                                 handleValueInput={handleValueInput} />
