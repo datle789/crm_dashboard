@@ -82,7 +82,7 @@ const CreateResponse = ({ modalCreateIsOpen, closeCreateModal }: Props) => {
             <Modal ariaHideApp={false}
                 isOpen={modalCreateIsOpen}
                 onRequestClose={closeCreateModal}
-                className='w-[520px] h-auto mx-auto mt-[100px] rounded-lg bg-gradient-to-r from-[#07bd89] to-[#006e8c] '
+                className='w-[520px] h-auto mx-auto mt-[20px] rounded-lg bg-gradient-to-r from-[#07bd89] to-[#006e8c] '
             >
                 <div className="relative pt-3">
                     <div className="w-full flex items-center justify-center">
@@ -129,18 +129,19 @@ const CreateResponse = ({ modalCreateIsOpen, closeCreateModal }: Props) => {
                                     name="description"
                                     value={formData.description}
                                     onChange={handleChange}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded "
                                 />
                             </div>
 
-                            <div className="mb-4">
-                                <label>Chọn ngày gặp vấn đề:</label>
+                            <div className="mb-4 w-full">
+                                <label className="block text-gray-100 text-sm font-bold mb-2">Chọn ngày gặp vấn đề:</label>
                                 <div>
                                     <input type="date"
                                         id="createdDate"
                                         name="createdDate"
                                         value={formData.createdDate}
                                         onChange={handleChange}
+                                        className=" p-[7px] w-full text-gray-800 text-[18px] border outline-none rounded-md"
                                     />
                                 </div>
 
