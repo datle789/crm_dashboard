@@ -123,17 +123,20 @@ const UpdateResponse = ({ uuid, id }: Props) => {
             <Modal ariaHideApp={false}
                 isOpen={modalUpdateIsOpen}
                 onRequestClose={closeModalUpdate}
+                className='w-[520px] h-auto mx-auto mt-[50px] rounded-lg bg-gradient-to-r from-[#07bd89] to-[#006e8c] '
             >
 
-                <div className="relative top-0">
-                    <div className="mt-2 absolute flex justify-end items-end w-full z-50">
-                        <FontAwesomeIcon onClick={closeModalUpdate} className="p-2 text-3xl text-white" icon={faXmark} size="lg" />
+                <div className="relative pt-3">
+                    <div className="w-full flex items-center justify-center">
+                        <div className="absolute flex justify-end items-end w-full z-50 cursor-pointer">
+                            <FontAwesomeIcon onClick={closeModalUpdate} className="p-3 text-3xl text-white" icon={faXmark} size="lg" />
+                        </div>
+                        <h1 className="text-2xl pt-2 font-bold text-center text-white">Tạo Phản Hồi</h1>
                     </div>
-                    <h1 className="text-2xl text-center text-white ">Tạo Phản Hồi</h1>
                     <div className="container mx-auto mt-8">
-                        <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-xl rounded-sm">
+                        <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-gradient-to-r from-[#07bd89] to-[#006e8c] rounded-sm">
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="customerName">
+                                <label className="block text-gray-100 text-sm font-bold mb-2" htmlFor="customerName">
                                     Tên người nhập
                                 </label>
                                 <input
@@ -146,7 +149,7 @@ const UpdateResponse = ({ uuid, id }: Props) => {
                                 />
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phoneNumber">
+                                <label className="block text-gray-100 text-sm font-bold mb-2" htmlFor="phoneNumber">
                                     Số điện thoại
                                 </label>
                                 <input
@@ -159,7 +162,7 @@ const UpdateResponse = ({ uuid, id }: Props) => {
                                 />
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+                                <label className="block text-gray-100 text-sm font-bold mb-2" htmlFor="description">
                                     Mô tả chi tiết
                                 </label>
                                 <input
@@ -175,7 +178,7 @@ const UpdateResponse = ({ uuid, id }: Props) => {
                                 handleValueInput={handleValueInput} />
 
                             <div className="mb-4 flex items-center space-x-5 my-8">
-                                <label className="block text-gray-700 text-sm font-bold" htmlFor="isSolved">
+                                <label className="block text-gray-100 text-sm font-bold" htmlFor="isSolved">
                                     Hoàn thành
                                 </label>
                                 <input
