@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
-// import Modal from 'react-modal'
+import Modal from 'react-modal'
 import getAdminData from "../SessionInfo";
 import UploadImages from '../uploadimage/UploadImages'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -67,13 +67,10 @@ const CreateResponse = ({ modalCreateIsOpen, closeCreateModal }: Props) => {
             Swal.fire('error', 'Vui lòng tải ảnh lên trước', 'error')
             return
         }
-        console.log(formData)
-
         const response = await axios.post('http://103.160.2.183:8082/crm', formData)
         if (response.status === 200) {
             // navigate('/home')
             window.location.reload();
-            console.log(formData)
         } else {
             Swal.fire('error', response.data.message, 'error')
         }
@@ -81,12 +78,18 @@ const CreateResponse = ({ modalCreateIsOpen, closeCreateModal }: Props) => {
     };
     return (
         <>
-            <ModalLayOut modalIsOpen={modalCreateIsOpen} closeModal={closeCreateModal}>
-                <div className="relative top-0">
-                    <div className="mt-2 absolute flex justify-end items-end w-full z-50">
-                        <FontAwesomeIcon onClick={closeCreateModal} className="p-2 text-3xl text-black" icon={faXmark} size="lg" />
+            <Modal ariaHideApp={false}
+                isOpen={modalCreateIsOpen}
+                onRequestClose={closeCreateModal}
+                className='w-[520px] h-[550px] mx-auto mt-[100px] rounded-lg '
+            >
+                <div className="relative top-6">
+                    <div className="w-full flex items-center justify-center">
+                        <div className="absolute flex justify-end items-end w-full z-50 cursor-pointer">
+                            <FontAwesomeIcon onClick={closeCreateModal} className="p-3 text-3xl text-gray-900" icon={faXmark} size="lg" />
+                        </div>
+                        <h1 className="text-2xl font-bold text-center text-gray-900">Tạo Phản Hồi</h1>
                     </div>
-                    <h1 className="text-2xl text-center text-black">Tạo Phản Hồi</h1>
                     <div className="container mx-auto mt-8">
                         <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-xl rounded-sm">
                             <div className="mb-4">
@@ -143,7 +146,7 @@ const CreateResponse = ({ modalCreateIsOpen, closeCreateModal }: Props) => {
                         </form>
                     </div>
                 </div>
-            </ModalLayOut>
+            </Modal>
 
 
 
