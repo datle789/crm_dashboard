@@ -24,6 +24,7 @@ const CreateResponse = ({ modalCreateIsOpen, closeCreateModal }: Props) => {
         customerName: '',
         phoneNumber: '',
         description: '',
+        createdDate: '',
         crmFile: null
     });
     useEffect(() => {
@@ -130,6 +131,19 @@ const CreateResponse = ({ modalCreateIsOpen, closeCreateModal }: Props) => {
                                     onChange={handleChange}
                                     className="w-full px-3 py-2 border border-gray-300 rounded"
                                 />
+                            </div>
+
+                            <div className="mb-4">
+                                <label>Chọn ngày gặp vấn đề:</label>
+                                <div>
+                                    <input type="date"
+                                        id="createdDate"
+                                        name="createdDate"
+                                        value={formData.createdDate}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
                             </div>
                             <UploadImages
                                 handleUpload={handleUrlImage}
