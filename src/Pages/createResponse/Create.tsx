@@ -1,19 +1,23 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Layout from "../../Layout"
 import axios from "axios";
 import { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
-import Modal from 'react-modal'
+// import Modal from 'react-modal'
 import getAdminData from "../SessionInfo";
 import UploadImages from '../uploadimage/UploadImages'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import ModalLayOut from "../Modal";
 
-const CreateResponse = () => {
+interface Props {
+    modalCreateIsOpen: boolean;
+    closeCreateModal: () => void
+}
+
+const CreateResponse = ({ modalCreateIsOpen, closeCreateModal }: Props) => {
     const navigate = useNavigate()
-    // let adminId: number = adminData
-    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [urlImage, seturlImage] = useState<string | null>('')
     const [formData, setFormData] = useState({
         uuid: '',
@@ -32,22 +36,12 @@ const CreateResponse = () => {
             }
         })
     }, [urlImage])
-    const openModal = () => {
-        setModalIsOpen(true);
-    };
-
-    const closeModal = () => {
-        setModalIsOpen(false);
-    };
-
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // useEffect(() => {
-    //     console.log(formData)
-    // }, [formData])
+
     const handleUrlImage = (urlImage: string) => {
         seturlImage(urlImage)
     }
@@ -87,77 +81,71 @@ const CreateResponse = () => {
     };
     return (
         <>
-            <div className="my-10">
-                <button onClick={openModal} className="bg-blue-500 text-white font-bold py-2 px-3 rounded">Tạo phản hồi</button>
-                <Modal ariaHideApp={false}
-                    isOpen={modalIsOpen}
-                    onRequestClose={closeModal}
-                >
-
-
-                    <div className="relative top-0">
-                        <div className="mt-2 absolute flex justify-end items-end w-full z-50">
-                            <FontAwesomeIcon onClick={closeModal} className="p-2 text-3xl text-white" icon={faXmark} size="lg" />
-                        </div>
-                        <h1 className="text-2xl text-center text-white">Tạo Phản Hồi</h1>
-                        <div className="container mx-auto mt-8">
-                            <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-xl rounded-sm">
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="customerName">
-                                        Tên người nhập
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="customerName"
-                                        name="customerName"
-                                        value={formData.customerName}
-                                        onChange={handleChange}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phoneNumber">
-                                        Số điện thoại
-                                    </label>
-                                    <input
-                                        type="tel"
-                                        id="phoneNumber"
-                                        name="phoneNumber"
-                                        value={formData.phoneNumber}
-                                        onChange={handleChange}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                                        Mô tả chi tiết
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="description"
-                                        name="description"
-                                        value={formData.description}
-                                        onChange={handleChange}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <UploadImages
-                                    handleUpload={handleUrlImage}
-                                    handleValueInput={handleValueInput}
-                                />
-                                <div className="text-center">
-                                    <button
-                                        type="submit"
-                                        className="bg-blue-500 text-white px-4 py-2 rounded-full focus:outline-none"
-                                    >
-                                        Tạo phản hồi
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+            <ModalLayOut modalIsOpen={modalCreateIsOpen} closeModal={closeCreateModal}>
+                <div className="relative top-0">
+                    <div className="mt-2 absolute flex justify-end items-end w-full z-50">
+                        <FontAwesomeIcon onClick={closeCreateModal} className="p-2 text-3xl text-black" icon={faXmark} size="lg" />
                     </div>
-                </Modal>
-            </div>
+                    <h1 className="text-2xl text-center text-black">Tạo Phản Hồi</h1>
+                    <div className="container mx-auto mt-8">
+                        <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-xl rounded-sm">
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="customerName">
+                                    Tên người nhập
+                                </label>
+                                <input
+                                    type="text"
+                                    id="customerName"
+                                    name="customerName"
+                                    value={formData.customerName}
+                                    onChange={handleChange}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phoneNumber">
+                                    Số điện thoại
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="phoneNumber"
+                                    name="phoneNumber"
+                                    value={formData.phoneNumber}
+                                    onChange={handleChange}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+                                    Mô tả chi tiết
+                                </label>
+                                <input
+                                    type="text"
+                                    id="description"
+                                    name="description"
+                                    value={formData.description}
+                                    onChange={handleChange}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded"
+                                />
+                            </div>
+                            <UploadImages
+                                handleUpload={handleUrlImage}
+                                handleValueInput={handleValueInput}
+                            />
+                            <div className="text-center">
+                                <button
+                                    type="submit"
+                                    className="bg-blue-500 text-white px-4 py-2 rounded-full focus:outline-none"
+                                >
+                                    Tạo phản hồi
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </ModalLayOut>
+
+
 
         </>
 
