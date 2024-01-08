@@ -102,9 +102,9 @@ const Table = ({ users, setUsers }: Props) => {
                             <th>Tên khách hàng</th>
                             <th>Số điện thoại</th>
                             <th>Mô tả</th>
-                            <th>Ngày tạo</th>
+                            <th>Ngày gặp vấn đề</th>
                             <th>Ảnh</th>
-                            <th>Hoàn Thành</th>
+                            <th>Hoàn thành</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -115,7 +115,7 @@ const Table = ({ users, setUsers }: Props) => {
                                 <td>{user.phoneNumber}</td>
                                 <td>{user.description}</td>
                                 <td>{user.createdDate}</td>
-                                <td className="w-[10%] h-[10%]">
+                                <td className="w-[100px] h-[100px]">
                                     {user.crmFile ? <a href={user.crmFile}><img src={user.crmFile} alt="" className="w-full h-full object-contain" /></a> : ''}
                                 </td>
                                 <td>{user.isSolved ? 'Đã giải quyết' : 'Chưa giải quyết'}</td>

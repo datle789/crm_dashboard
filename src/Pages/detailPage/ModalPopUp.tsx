@@ -72,7 +72,7 @@ const ModalPopUp = ({ uuid }: Props) => {
                                 <th className='text-white'>Tên khách hàng</th>
                                 <th className='text-white'>Số điện thoại</th>
                                 <th className='text-white'>Mô tả</th>
-                                <th className='text-white'>Ngày</th>
+                                <th className='text-white'>Ngày gặp vấn đề</th>
                                 <th className='text-white'>Ảnh</th>
                                 <th className='text-white'>Hoàn thành</th>
                             </tr>
@@ -84,7 +84,7 @@ const ModalPopUp = ({ uuid }: Props) => {
                                     <td className='text-white'>{responseList.phoneNumber}</td>
                                     <td className='text-white'>{responseList.description}</td>
                                     <td className='text-white'>{responseList.createdDate}</td>
-                                    <td className="w-[10%] h-[10%]">
+                                    <td className="w-[100px] h-[100px]">
                                         {responseList.crmFile ?
                                             <img src={responseList.crmFile} alt="" onClick={() => openModalImage(responseList.crmFile)} />
                                             : ''}
