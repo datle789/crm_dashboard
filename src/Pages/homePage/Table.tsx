@@ -15,6 +15,8 @@ interface Props {
 }
 
 
+// const pageSize = 10;
+
 const Table = ({ users, setUsers }: Props) => {
 
     const [name, setName] = useState('')
@@ -25,6 +27,18 @@ const Table = ({ users, setUsers }: Props) => {
     }, [])
 
 
+    // const [currentPage, setCurrentPage] = useState(1);
+
+    // const totalPages = Math.ceil(users.length / pageSize);
+    // const startIndex = (currentPage - 1) * pageSize;
+    // const visibleUsers = users.slice(startIndex, startIndex + pageSize);
+
+    // const handlePageChange = (pageNumber: number) => {
+    //     setCurrentPage(pageNumber);
+    // };
+
+
+    // modal create
     const [modalCreateIsOpen, setModalCreateIsOpen] = useState(false);
 
     const openCreateModal = () => {
@@ -36,7 +50,7 @@ const Table = ({ users, setUsers }: Props) => {
     };
 
 
-
+    // modal delete
     const [modalDeleteIsOpen, setModalDeleteIsOpen] = useState(false);
     const [iddelete, setiddelete] = useState<number>(0)
     const openDeleteModal = (id: number) => {
@@ -136,6 +150,22 @@ const Table = ({ users, setUsers }: Props) => {
                 </table>
                 <DeleteResponse id={iddelete} modalDeleteIsOpen={modalDeleteIsOpen} closeDeleteModal={closeDeleteModal} />
                 {/* <UpdateResponse formDataUpdate={formData} id={idUpdate} modalUpdateIsOpen={modalUpdateIsOpen} closeModalUpdate={closeModalUpdate} /> */}
+
+
+                {/* Pagination
+                <div className="mt-4 flex justify-center">
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handlePageChange(index + 1)}
+                            className={`mx-1 px-3 py-1 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
+                                }`}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                </div> */}
+
             </div>
 
         </>

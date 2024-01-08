@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
-// import Modal from 'react-modal'
+import Modal from 'react-modal'
 import getAdminData from "../SessionInfo";
 import UploadImages from '../uploadimage/UploadImages'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
