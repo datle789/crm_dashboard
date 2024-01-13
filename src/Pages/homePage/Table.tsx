@@ -22,7 +22,7 @@ const Table = () => {
     const [users, setUsers] = useState<UserReply[]>([])
     const [currentPage, setCurrentPage] = useState(0)
     const [totalPages, setTotalPages] = useState(0)
-    const [size, setSize] = useState(2)
+    const [size, setSize] = useState(10)
 
 
     useEffect(() => {
