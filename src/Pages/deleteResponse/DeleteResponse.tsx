@@ -15,8 +15,6 @@ interface Props {
 
 const DeleteResponse = ({ id, modalDeleteIsOpen, closeDeleteModal }: Props) => {
 
-    // const [modalIsOpen, setModalIsOpen] = useState(false);
-
 
     const handleDeleteBook = async () => {
         const response = await axios.delete(`http://103.160.2.183:8082/crm/${id}`)
@@ -26,14 +24,6 @@ const DeleteResponse = ({ id, modalDeleteIsOpen, closeDeleteModal }: Props) => {
             console.log('không thể xóa')
         }
     }
-
-    // const openModal = () => {
-    //     setModalIsOpen(true);
-    // };
-
-    // const closeModal = () => {
-    //     setModalIsOpen(false);
-    // };
 
     return (
         <>
