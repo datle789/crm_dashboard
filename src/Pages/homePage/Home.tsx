@@ -10,21 +10,23 @@ import { getAccessToken } from '../type/GetAccessToken';
 
 const Home = () => {
 
-    const [users, setUsers] = useState<UserReply[]>([])
+    // const [users, setUsers] = useState<UserReply[]>([])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get('http://103.160.2.183:8082/crms')
-            setUsers(response.data)
-        }
-        fetchData()
-    }, [])
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const response = await axios.get('http://103.160.2.183:8082/crms')
+    //         setUsers(response.data)
+    //     }
+    //     fetchData()
+    // }, [])
+
+
 
 
     return (
         <Layout>
-            <Table users={users} setUsers={setUsers} />
-
+            {/* <Table users={users} setUsers={setUsers} /> */}
+            <Table />
         </Layout>
     )
 }

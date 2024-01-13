@@ -8,6 +8,7 @@ import getAdminData from '../SessionInfo'
 import { useEffect, useState } from "react";
 import UpdateResponse from "../updateResponse/UpdateResponse";
 import axios from "axios";
+import Paginations from "./Pagination";
 
 interface Props {
     users: UserReply[];
@@ -15,7 +16,24 @@ interface Props {
 }
 
 
-const Table = ({ users, setUsers }: Props) => {
+const Table = () => {
+
+    //pagination
+    const [users, setUsers] = useState<UserReply[]>([])
+    const [currentPage, setCurrentPage] = useState(0)
+    const [totalPages, setTotalPages] = useState(0)
+    const [size, setSize] = useState(2)
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get(`http://localhost:8082/crms?page=${currentPage}&size=${size}`)
+            setUsers(response.data.content)
+            setTotalPages(response.data.totalPages)
+        }
+        fetchData()
+    }, [currentPage])
+
 
     const [name, setName] = useState('')
     useEffect(() => {
@@ -47,44 +65,6 @@ const Table = ({ users, setUsers }: Props) => {
     const closeDeleteModal = () => {
         setModalDeleteIsOpen(false)
     }
-
-
-
-    // const [modalUpdateIsOpen, setModalUpdateIsOpen] = useState(false);
-    // const [idUpdate, setIdUpdate] = useState<number>(0)
-    // const [formData, setFormData] = useState({
-    //     uuid: 0,
-    //     id: 0,
-    //     customerName: '',
-    //     phoneNumber: 0,
-    //     description: '',
-    //     createdDate: '',
-    //     isSolved: false,
-    //     crmFile: ''
-    // });
-
-
-    // const openModalUpdate = async (uuid: number, id: number) => {
-    //     try {
-    //         const fetchData = async () => {
-    //             const response = await axios.get(` http://103.160.2.183:8082/crm/${id}`)
-    //             setFormData(response.data)
-    //             setIdUpdate(id)
-    //         }
-    //         fetchData()
-    //     } catch (error) {
-    //         console.log('không call được api')
-    //     }
-
-    //     setModalUpdateIsOpen(true);
-    // };
-
-
-
-    // const closeModalUpdate = () => {
-    //     setModalUpdateIsOpen(false);
-    // };
-
 
 
 
@@ -127,13 +107,13 @@ const Table = ({ users, setUsers }: Props) => {
                                             Xóa
                                         </button>
                                         <UpdateResponse uuid={user.uuid} id={user.id} />
-                                        {/* <button onClick={() => openModalUpdate(user.uuid, user.id)} className="bg-blue-500 text-white font-bold py-1 px-2 rounded">Sửa</button> */}
                                     </div>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                <Paginations currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} />
                 <DeleteResponse id={iddelete} modalDeleteIsOpen={modalDeleteIsOpen} closeDeleteModal={closeDeleteModal} />
                 {/* <UpdateResponse formDataUpdate={formData} id={idUpdate} modalUpdateIsOpen={modalUpdateIsOpen} closeModalUpdate={closeModalUpdate} /> */}
             </div>
